@@ -1,0 +1,5 @@
+my_hello:
+    path: /good/morning/morioh
+    defaults:
+      _controller: Drupal\hello_world\Controller\HelloWorldController::sayHello
+      _requirements: 'access content'
