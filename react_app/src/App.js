@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DestinationList from "./Components/Destination/DestinationList";
 const LIST_URL = 'http://localhost:8900/dsin/web/jsonapi/node/destination';
-
+var token= '';
 class App extends Component {
  constructor() {
     super();
@@ -16,6 +16,9 @@ class App extends Component {
         <DestinationList
           data={this.state.data}
         />
+
+	<br/>
+      {token}
       </div>
     );
   }
@@ -32,6 +35,29 @@ class App extends Component {
  }componentWillMount() {
    this.loadDestinations();
  }
+
+componentDidMount()
+{
+fetch('http://localhost:80/dsin/web/oauth/token', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    grant_type: 'password',
+    client_id: 'fd9bc24f-9134-491c-a0d5-4700ad76e021',
+    client_secret: 'jojojojo',
+    username:'',
+    password:'',
+  })
+}).then(function (response) {
+	token =response;
+})
+
+
+}
+
 }
 
 export default App;
