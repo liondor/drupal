@@ -1,5 +1,5 @@
 my_hello:
-    path: '/hello'
+    path: '/hello/{ticket}'
     defaults:
       _controller: 'Drupal\hello_world\Controller\HelloWorldController::sayHello'
     requirements:
