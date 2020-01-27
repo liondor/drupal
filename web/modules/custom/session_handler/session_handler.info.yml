@@ -1,0 +1,4 @@
+name: "Session Handler"
+type: module
+description: "Sert à autoriser l'utilisateur à visualiser certain type de contenus après avoir vérifier qu'il a bien un compte à l'université"
+core: 8.x
