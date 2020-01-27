@@ -13,7 +13,7 @@ export default class DestinationList extends React.Component {
         data.length > 0 ?
           data.map(item => <DestinationItem {...item} key={item.id}/>)
           :
-          <div>No destinations found.</div>
+            <div>No destinationnnns found.</div>
         }
       </div>
     );

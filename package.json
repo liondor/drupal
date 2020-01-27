@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-icons": "^3.8.0",
+    "react-responsive-navbar": "^1.0.11"
+  }
+}
