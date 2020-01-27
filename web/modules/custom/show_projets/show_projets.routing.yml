@@ -1,0 +1,6 @@
+show_projets:
+  path: '/projets'
+  defaults:
+    _controller: 'Drupal\show_projets\Controller\ShowProjetsController::show'
+  requirements:
+    _permission: 'access content'

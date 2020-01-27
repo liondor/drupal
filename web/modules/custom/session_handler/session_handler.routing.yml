@@ -1,0 +1,6 @@
+session_handler:
+  path: '/sessionhandle'
+  defaults:
+    _controller: 'Drupal\session_handler\Controller\SessionHandlerController::handleSession'
+  requirements:
+    _permission: 'access content'

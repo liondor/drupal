@@ -1,0 +1,3 @@
+services:
+    hello_world.hello_world_generator:
+      class: Drupal\hello_world\ServiceFolder\HelloWorldGenerator

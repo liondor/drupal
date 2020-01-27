@@ -1,0 +1,4 @@
+name: "Show Projets"
+type: module
+description: "Permet de gérer l'authorisation en ce qui concerne l'affichage des projets"
+core: 8.x

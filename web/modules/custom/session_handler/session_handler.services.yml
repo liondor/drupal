@@ -1,0 +1,6 @@
+services:
+  session_handler.verify_session:
+    class: Drupal\session_handler\Actions\SessionVerify
+  session_handler.open_session:
+    class: Drupal\session_handler\Actions\SessionOpen
+
