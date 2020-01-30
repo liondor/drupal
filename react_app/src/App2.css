@@ -21,7 +21,7 @@ a {
 body {
   font-family: 'Source Sans Pro', 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
-  padding: 1em 3em;
+  padding: 10px;
   height: 100%;
   background-color: #F2F4FF;
 
