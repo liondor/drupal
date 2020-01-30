@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from "react-dom";
-
+import Drawer from "@material-ui/core/Drawer"
 
 const SideMenu = (props) => {
-    if (props.show) {
+    /*if (props.show) {
         return (
+
             ReactDOM.createPortal(
                 <React.Fragment>
                     <div className="modal-overlay" onClick={props.toggle}/>
@@ -20,10 +21,26 @@ const SideMenu = (props) => {
                         </div>
                     </div>
                 </React.Fragment>, document.body)
-        )
+          )
     } else {
         return null;
-    }
+    }*/
+    return (
+    <Drawer anchor={"left"} open={props.show} onClose={props.openModal}>
+    <div>
+      enfaefanêfnaneofna
+    </div>
+<div>
+      enfaefanêfnaneofna
+    </div>
+<div>
+      enfaefanêfnaneofna
+    </div>
+<div>
+      enfaefanêfnaneofna
+    </div>
+
+    </Drawer>)
 }
 
 export default SideMenu;
