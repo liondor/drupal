@@ -4,7 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 var HtmlToReactParser = require('html-to-react').Parser;
 const GridTwo = (props) => {
     var [poles, setPoles] = useState(null)
-    const URL_API = "http://localhost:8900/dsin/web/jsonapi/node/"
+    const URL_API = "http://localhost:8900/api/jsonapi/node/"
     useEffect(() => {
 
         fetch(URL_API + 'poles_dsin?fields[node--poles_dsin]=title,body,body.value', {

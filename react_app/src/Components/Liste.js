@@ -8,7 +8,7 @@ function Liste(props) {
     var [formattedCategories, setFormattedCategories] = useState(null)
     var pager = 'page[limit]=' + props.limit;
     var content_type = ''
-    const URL_API = "http://localhost:8900/dsin/web/jsonapi/node/"
+    const URL_API = "http://localhost:8900/api/jsonapi/node/"
     useEffect(() => {
         if (props.limit !== null && props.limit !== undefined) {
             pager = '&page[limit]=' + props.limit;
@@ -75,7 +75,7 @@ function Liste(props) {
                         imageURL = image.url
                 })
             } else {
-                imageURL = "/dsin/web/sites/default/files/default_images/question-mark.png"
+                imageURL = "/api/sites/default/files/default_images/question-mark.png"
             }
             titre = categorie.attributes.title
             //   console.log(categorie.attributes)
