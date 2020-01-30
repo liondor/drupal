@@ -26,20 +26,10 @@ const SideMenu = (props) => {
         return null;
     }*/
     return (
-    <Drawer anchor={"left"} open={props.show} onClose={props.openModal}>
-    <div>
-      enfaefanêfnaneofna
-    </div>
-<div>
-      enfaefanêfnaneofna
-    </div>
-<div>
-      enfaefanêfnaneofna
-    </div>
-<div>
-      enfaefanêfnaneofna
-    </div>
-
+    <Drawer anchor={"left"} open={props.show} onClose={props.toggle}>
+      <>
+        {props.content(props.toggle)}
+      </>
     </Drawer>)
 }
 

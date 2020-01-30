@@ -101,6 +101,10 @@ ul {
   top: 0;
   z-index: -1;
 }
+.flex
+{
+  display: flex;
+}
 .grid
 {
   display: grid;
@@ -231,13 +235,8 @@ header {
 }
 
 .headerSideMenu {
-  background: white;
-  position: relative;
-  border-radius: 3px;
-  max-width: 50vw;
-  height: 100vh;
-  grid-row-gap: 1vh;
-  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
 }
 
 
