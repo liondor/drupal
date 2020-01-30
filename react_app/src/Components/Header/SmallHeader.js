@@ -32,7 +32,7 @@ const SmallHeader = () => {
     const [hasClicked, setHasClicked] = useState(false)
     return (
         <>
-            <div className={"header"}>
+            <div className={"header grid"} >
                 <div className={"menu_disposition styleSVG"} onClick={openModal}>
                     <MdMenu/>
                 </div>

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const Footer = () => {
     return (
         <>
-            <footer className={"grid4"}>
+            <footer className={"grid4 grid"}>
 
                 <div id={"footerLogoContact"}>
                     <img className={"footerLogo"} src={logo}/>

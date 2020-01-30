@@ -9,7 +9,7 @@ const SideMenu = (props) => {
                 <React.Fragment>
                     <div className="modal-overlay" onClick={props.toggle}/>
                     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-                        <div className="headerSideMenu">
+                        <div className="headerSideMenu grid">
                             <div className="modal-header">
                                 <button type="button" className="modal-close-button" data-dismiss="modal"
                                         aria-label="Close" onClick={props.toggle}>

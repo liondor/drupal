@@ -107,7 +107,7 @@ function Liste(props) {
     }
 
     return (
-        <div id={"#listeOutils"} className={"conteneur"}>
+        <div id={"#listeOutils"} className={"conteneur grid"}>
             {renderChild()}
 
         </div>

@@ -20,7 +20,7 @@ const Contact = () => {
     return (
         <div>
             <Breadcrumbs/>
-            <div id={"contact"}>
+            <div id={"contact"} className={".grid"}>
                 <form id={"formulaire"} onSubmit={handleSubmit}>
                     <label htmlFor={"nom"}>Nom </label>
                     <input type={"text"} name={"nom"} placeholder={"Nom"}/>

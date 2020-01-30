@@ -3,7 +3,7 @@ import Carte from "./Cartes/Carte";
 
 const Projet = () => {
     return (
-        <div className={"grid2 projets"}>
+        <div className={"grid2 projets grid"}>
             <Carte/>
             <Carte/>
             <Carte/>

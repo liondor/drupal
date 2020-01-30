@@ -8,7 +8,7 @@ export default class BigHeader extends React.Component {
     render() {
         return (
             <>
-                <div className={"header"} id={"header"}>
+                <div className={"header grid"} id={"header"}>
                     <div className={"logo_container"}>
                         <Link to="/"><img className={"logo"} src={logo}/></Link>
                     </div>

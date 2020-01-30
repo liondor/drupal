@@ -7,12 +7,12 @@ const Accueil = (props) => {
     return (
         <div id={"accueil"}>
             <h2 className={"titreSection"}> Conseils</h2>
-            <div className="conteneur fillScreen">
+            <div className="conteneur fillScreen grid">
                 <Liste token={props.token} limit={3} type={'conseils'}/>
 
             </div>
             <h2 className={"titreSection"}> Actualités</h2>
-            <div className="conteneur fillScreen">
+            <div className="conteneur fillScreen grid">
                 <Liste token={props.token} limit={3} type={'articles'}/>
 
             </div>
