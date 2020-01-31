@@ -391,7 +391,7 @@ input[type="text"] {
 .accueilPhoto {
   justify-self: center;
  /* grid-area: photo;*/
-  width: 66%;
+  width: 45%;
   height: auto;
 }
 #mapBackground {
@@ -627,7 +627,7 @@ footer h4, footer h6 {
   margin: 8vh 0;
   display: grid;
   width: 100%;
-  grid-template-columns:  minmax(3em,15em);
+  grid-template-columns:  minmax(3em,30em);
   grid-template-rows : min-content 1fr;
   justify-content: center;
 /*  grid-template-areas: "photo photo . text text text";
