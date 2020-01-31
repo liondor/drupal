@@ -9,7 +9,7 @@ import SearchBar from "./SearchBar";
 let menu;
 menu = (toggle) => {
     return (
-        <div className={"flex headerSideMenu"}>
+        <div className={"grid headerSideMenu"}>
             <div className={"goldenText menu"}>
                 <Link className={"goldenText menu"} onClick={toggle} to="/outilsMissions">
                     Outils numériques & nos missions

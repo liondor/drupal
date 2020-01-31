@@ -23,6 +23,7 @@ body {
   text-rendering: optimizeLegibility;
   padding: 10px;
   height: 100%;
+  width: 100%;
   background-color: #F2F4FF;
 
 }
@@ -37,6 +38,7 @@ button {
 
 html {
   height: 100%;
+  width: 100%;
 }
 
 
@@ -169,7 +171,7 @@ ul {
   top: 0;
   left: 0;
   width: 100%;
-  grid-template-areas: "logo menu menu menu searchBar";
+  /*grid-template-areas: "logo menu menu menu searchBar";*/
   align-content: center;
   width: 100%;
   box-shadow: 0 2px 15px #999;
@@ -216,7 +218,7 @@ header {
   align-content: center;
   grid-template-areas: "logo logo . searchBar searchBar" ". menu menu menu menu";
 */
-  grid-template-areas: "menu logo searchBar";
+  grid-template-areas: "menu logo . ";
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: minmax(3px, 1fr);
   justify-items: center;
@@ -236,10 +238,9 @@ header {
 }
 
 .headerSideMenu {
-  flex-direction: column;
-  align-items: center;
+  height: 80%;
+ align-content: space-evenly;
 }
-
 
 
 header hr {
@@ -549,6 +550,7 @@ footer h4, footer h6 {
   grid-template-rows: 2fr 1fr;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   max-width: 75%;
+  height:75vw;
   justify-items: center;
   align-content: center;
   background: #333;
@@ -643,7 +645,7 @@ footer h4, footer h6 {
   width: 100%;
   grid-template-columns: auto auto;
   align-content: center;
-  grid-area: searchBar;
+ /* grid-area: searchBar;*/
 }
 
 .sideMenu > * {
