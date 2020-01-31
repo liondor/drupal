@@ -21,7 +21,7 @@ a {
 body {
   font-family: 'Source Sans Pro', 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
-  padding: 10px;
+  padding: 5px;
   height: 100%;
   width: 100%;
   background-color: #F2F4FF;
@@ -359,7 +359,6 @@ input[type="text"] {
   margin-top: 3vh;
   margin-bottom: 3vh;
   grid-row-gap: 4em;
-  padding: 1em;
 }
 
 .accueilOutilsWrapper {
@@ -377,7 +376,7 @@ input[type="text"] {
 }
 
 .accueilText {
-  grid-area: text;
+ /* grid-area: text;*/
   text-align: left;
 }
 
@@ -391,7 +390,7 @@ input[type="text"] {
 
 .accueilPhoto {
   justify-self: center;
-  grid-area: photo;
+ /* grid-area: photo;*/
   width: 66%;
   height: auto;
 }
@@ -549,8 +548,8 @@ footer h4, footer h6 {
   display: grid;
   grid-template-rows: 2fr 1fr;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  max-width: 75%;
-  height:75vw;
+ height: 15em;
+  width: 15em;
   justify-items: center;
   align-content: center;
   background: #333;
@@ -628,9 +627,11 @@ footer h4, footer h6 {
   margin: 8vh 0;
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr 40px repeat(3, 1fr);
-  grid-template-areas: "photo photo . text text text";
-
+  grid-template-columns:  minmax(3em,15em);
+  grid-template-rows : min-content 1fr;
+  justify-content: center;
+/*  grid-template-areas: "photo photo . text text text";
+*/
 }
 
 .projets {
