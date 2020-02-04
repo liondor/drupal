@@ -242,8 +242,10 @@ header {
 }
 
 .headerSideMenu {
-  height: 80%;
- align-content: space-evenly;
+  height: 100vh;
+  align-content: baseline;
+  grid-row-gap: 10%;
+  margin: 5%;
 }
 
 
@@ -624,7 +626,8 @@ footer h4, footer h6 {
 .outilPresentationTitre {
   color: var(--secondary-color);
 
-  font-size: 3vw;
+  /*font-size: 3vw;
+*/
 }
 
 .photoText {

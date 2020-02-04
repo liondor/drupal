@@ -13,6 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
  * 3.5) Eventuellement convertir le contenu du corps en HTML
  * 4) Afficher le titre et le corps (Entrée = 2 Strings; Sortie = 1 balise h2 contenant le titre + 1 div qui a pour enfant le String contenant le corps)
  *
+ *
  * */
 const Presentation = (props) => {
   var searchDone = useRef(false)
@@ -32,8 +33,10 @@ const Presentation = (props) => {
   }
   return (
     <div className={"outilPresentation"}>
-      <h1 className={"outilPresentationTitre"}> {props.titre}</h1>
+      <h1 className={"outilPresentationTitre"}> {titre}</h1>
+
       <Test/>
+      {image ? <img src={image}/> : ""}
       {contenu !== "" ? parse(contenu) : (
         <div style={{display: "grid", justifyItems: "center"}}><CircularProgress/></div>)}
 
@@ -64,18 +67,19 @@ const Presentation = (props) => {
     }
     if (results !== null) {
       console.log(results)
-      var data = extractData(results, setImage, 'id', 'type', 'contenu', 'image')
+      var data = extractData(results, setImage, 'id', 'titre', 'type', 'contenu', 'image')
       if (typeof data !== "undefined") {
         setId(data['id'])
+        setTitre(data['titre'])
         setType(data['type'])
         setContenu(data['contenu'])
       }
-
-
       console.log(image)
     }
     return (
       <>
+        <h1 className={"outilPresentationTitre"}></h1>
+
         {
 
         }

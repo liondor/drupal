@@ -4,6 +4,10 @@ import ListLinks from "./ListLinks";
 import SearchBar from "./Header/SearchBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+/**
+ * TODO: Restraindre le type de contenu pouvant être trouvé via la recherche
+ *
+ * */
 const Recherche = () => {
   var [results, setResults] = useState(null)
   var searchDone = useRef(false)
