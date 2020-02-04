@@ -48,7 +48,7 @@ export default function Login() {
         var cookie = getCookie("JSESSION")
         console.log(cookie)
         if (cookie) {
-            fetch('http://localhost:8900/dsin/web/hello?validate=' + cookie
+          fetch('http://localhost:8900/api/hello?validate=' + cookie
             )
         }
         return false;
@@ -60,7 +60,7 @@ export default function Login() {
         if (!_.isEqual(sessionCookie, "")) {
             sessionCookieArgument = '&session=' + sessionCookie
         }
-        fetch('http://localhost:8900/dsin/web/hello?ticket=' + ticket + sessionCookieArgument
+      fetch('http://localhost:8900/api/hello?ticket=' + ticket + sessionCookieArgument
         ).then(result => result.text()).then(result => {
             setXMLResponse(result)
             isFetchDone.current = true

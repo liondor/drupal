@@ -6,12 +6,13 @@ import Accueil from "./Components/Accueil"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import TwoOptions from "./Components/TwoOptions";
 import Liste from "./Components/Liste";
-import OutilPresentation from "./Components/OutilPresentation";
+import Presentation from "./Components/Presentation";
 import Contact from "./Components/Contact";
 import GridTwo from "./Components/GridTwo";
 import Projet from "./Components/Projet";
 import ScrollToTop from "./Components/ScrollToTop";
 import Login from "./Login";
+import Recherche from "./Components/Recherche";
 
 const LIST_URL = 'http://localhost:8900/dsin/web/jsonapi/node/conseils?fields[node--conseils]=title,body,field_image&fields[file--file]=uri&include=field_image';
 var qs = require('qs');
@@ -48,8 +49,8 @@ class App extends Component {
                                     l'université</h1>
                                 <Liste token={this.state.token} type={'outils'}/>
                             </Route>
-                            <Route path="/exempleOutil">
-                                <OutilPresentation/>
+                          <Route path="/outil">
+                            <Presentation/>
                             </Route>
                             <Route path="/missions">
                                 <h1 className={"titreSection"}> Nos missions</h1>
@@ -67,7 +68,9 @@ class App extends Component {
                             </Route>
                             <Route path="/login">
                                 <Login/>
-
+                            </Route>
+                          <Route path="/recherche">
+                            <Recherche/>
                             </Route>
                         </Switch>
                         <Footer/>
@@ -145,7 +148,7 @@ class App extends Component {
                 method: 'GET',
                 headers: {
                     'Autohrization': 'Beaver' + this.state.token.access_token,
-                    'Accept': 'application/vnd.api+json',
+                  'Accept': 'application/vnd.api+json',
                 },
             }).then((response) => response.json()).then((data) => this.setState({articles: data.data,}
             ))

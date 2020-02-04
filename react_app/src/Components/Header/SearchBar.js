@@ -1,21 +1,28 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {MdSearch} from 'react-icons/md'
 import Bouton from "../Bouton";
-
+import {Link} from "react-router-dom";
 
 function SearchBar(props) {
     var [open, setOpen] = useState(false)
+  var [query, setQuery] = useState("")
     var ignoreFirstRender = useRef();
     ignoreFirstRender = true;
     var hideClass = "";
+  var reset = props.reset;
     if (props.size === "small") {
         hideClass = "hide"
     }
-    const handleOpen = () => {
-        alert("Why")
+  const toggleDrawer = (props) => {
         setOpen(!open)
         ignoreFirstRender = false;
     }
+
+  function handlePress(e) {
+    console.log("test")
+
+    return null
+  }
     useEffect(() => {
         /*
         if (open && !ignoreFirstRender) {
@@ -27,13 +34,21 @@ function SearchBar(props) {
     }, [open]);
     return (
         <div className={"searchbar_container"}>
-            <input id={'searchInput'} className={"hide"} type={"text"} placeholder={"Rechercher..."}/>
+          <input id={'searchInput'} className={"hide"} type={"text"} placeholder={"Rechercher..."}
+                 onChange={handleChange}/>
             <label className={'headerSearchSubmitWrapper'}>
-                <input type={"submit"} className={'headerSearchSubmit'}/>
-                <Bouton type={'main'} contenu={<MdSearch onClick={() => handleOpen}/>}/>
+              <input type={"submit"} className={'headerSearchSubmit'}/>
+              <Link to={"/recherche?q=" + query} onClick={props.reset}> <Bouton type={'main'} contenu={<MdSearch/>}
+                                                                                onClick={props.toggle}/></Link>
             </label>
         </div>
     );
+
+  function handleChange(event) {
+
+    setQuery(event.target.value)
+
+  }
 
 
 }

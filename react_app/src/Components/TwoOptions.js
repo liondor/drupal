@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const TwoOptions = () => {
     return (
-        <div className={"twoOptions grid2 grid"}>
+      <div className={"twoOptions grid"}>
             <Link to="/outils">
                 <div>
                     <IconContext.Provider value={{className: "optionIcone"}}>
