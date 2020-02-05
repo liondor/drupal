@@ -1,10 +1,11 @@
-var baseUrl = "http://localhost:8900/api/jsonapi/"
+var BASE_URL = "http://localhost:8900/api/"
+const RESSOURCE_URL = BASE_URL + "jsonapi/"
 
 
-export default function getItem(type, id, functionToKeepResults, functionToPreventSeveralAPICall) {
+export function getItem(type, id, functionToKeepResults, functionToPreventSeveralAPICall) {
   if (type !== undefined && id !== undefined) {
     console.log("Parameters are set ! Type :" + type + "  Id :" + id);
-    let url = baseUrl + "/node/" + type + "/" + id
+    let url = RESSOURCE_URL + "/node/" + type + "/" + id
     functionToPreventSeveralAPICall()
     fetch(url
     ).then(result => result.json()
@@ -65,7 +66,7 @@ export function getImageURL(jsonObjectRelation, functionToSaveURL) {
         if (typeof jsonObjectRelation.field_image.data.id !== "undefined") {
 
           let imageID = jsonObjectRelation.field_image.data.id
-          return fetch(baseUrl + "file/file/" + imageID
+          return fetch(RESSOURCE_URL + "file/file/" + imageID
           ).then(result => result.json()
           ).then(result => {
               console.log(result);
@@ -84,5 +85,11 @@ export function getImageURL(jsonObjectRelation, functionToSaveURL) {
   } else {
     console.log('The content you asked for does not have an relation')
   }
+}
 
+export function connectToGLPI(username, password, setToken) {
+  fetch(BASE_URL + 'GLPI?connect=1'
+  ).then(response => response.json()
+  ).then(responseJSON => responseJSON.session_token
+  ).then(token => setToken(token))
 }

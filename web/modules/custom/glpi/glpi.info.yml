@@ -1,0 +1,4 @@
+name: "GLPI"
+type: module
+description: "Gère la connexion au GLPI et la création de ticket"
+core: 8.x

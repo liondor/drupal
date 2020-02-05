@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import ImageMapper from 'react-image-mapper';
-import Guadeloupe from './IMG/Guadeloupe.png'
-import Shoelcher from './IMG/schoelcher.jpg'
+import Guadeloupe from '../IMG/Guadeloupe.png'
+import Shoelcher from '../IMG/schoelcher.jpg'
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";

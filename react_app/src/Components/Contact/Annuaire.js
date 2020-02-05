@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import Dialogue from "./Dialogue";
+import Dialogue from "../Dialogue";
 import {Paper} from "@material-ui/core";
 
 

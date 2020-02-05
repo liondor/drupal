@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import useGetParameters from "../Util/urlhandling"
-import getItem, {extractData} from "../Util/apiHandling"
+import {extractData, getItem} from "../Util/apiHandling"
 import parse from 'html-react-parser'
 import CircularProgress from "@material-ui/core/CircularProgress";
 

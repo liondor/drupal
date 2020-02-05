@@ -1,0 +1,6 @@
+show_projets:
+  path: '/glpi'
+  defaults:
+    _controller: 'Drupal\glpi\Controller\GlpiController::handle'
+  requirements:
+    _permission: 'access content'

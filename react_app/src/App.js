@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import TwoOptions from "./Components/TwoOptions";
 import Liste from "./Components/Liste";
 import Presentation from "./Components/Presentation";
-import Contact from "./Components/Contact";
+import Contact from "./Components/Contact/Contact";
 import GridTwo from "./Components/GridTwo";
 import Projet from "./Components/Projet";
 import ScrollToTop from "./Components/ScrollToTop";
