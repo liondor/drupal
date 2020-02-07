@@ -2,7 +2,8 @@
 
 
 namespace Drupal\session_handler\Actions;
-use \Drupal\node\Entity\Node;
+
+use Drupal\node\Entity\Node;
 
 class SessionOpen
 {
@@ -20,21 +21,24 @@ class SessionOpen
   {
     if($ticket)
     {
-      $url='https://auth.martinique.univ-ag.fr/cas/serviceValidate?service=http://127.0.0.1:8900/dsin/web/hello&ticket='.$ticket;
+      $url = 'https://auth.martinique.univ-ag.fr/cas/serviceValidate?service=http://localhost:8900/projets&ticket=' . $ticket;
       $xml = file_get_contents($url);
+
       //  echo $xml;
       if(strpos($xml,'cas:authenticationSuccess'))
       {
-        echo 'Yatta ! Banzai !';
         $newSession=$this->createSessionNode();
-        return $newSession->get('title')->value;
+        $result['id_session'] = $newSession->get('title')->value;
+        return $result;
       }
       elseif (strpos($xml,'cas:authenticationFailure'))
       {
-        echo "Vous n'avez pas été reconnu par notre système. Veuillez réessayer.";
+        $result['message'] = "Authentification failed : Vous n'avez pas été reconnu";
+        return $result;
       }
       else{
-        echo 'Something went horribly wrong';
+        $result['message'] = "Something went horribly wrong";
+        return $result;
       }
     }
   }

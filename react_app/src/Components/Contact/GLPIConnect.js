@@ -6,10 +6,21 @@ import {connectToGLPI} from '../../Util/apiHandling'
 function GLPIConnect(props) {
   var [userName, setUserName] = useState("")
   var [password, setPassword] = useState("")
+  var [response, setResponse] = useState(null)
+
+  if (response) {
+    if (typeof response.session_token !== "undefined") {
+      props.setToken(response.session_token)
+    } else if (typeof response.login_error !== "undefined") {
+      console.log(response.login_error)
+    } else {
+      console.log("Communication error between Drupal and React")
+    }
+  }
   return (
     <div>
       <Paper>
-
+        {response ? console.log(response) : ""}
         <p>Pour déposer un ticket, veuillez vous connecter</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor={"username"}>Nom d'utilisateur </label>
@@ -26,8 +37,8 @@ function GLPIConnect(props) {
     e.preventDefault();
     var name = e.target.username.value
     var pass = e.target.mdp.value
-    connectToGLPI(name, pass, props.setToken)
-    console.log(e.target.username.value)
+    connectToGLPI(name, pass, setResponse)
+
   }
 }
 

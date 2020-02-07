@@ -1,0 +1,6 @@
+services:
+  glpi_handler.glpi_login:
+    class: Drupal\glpi\Services\GLPIConnect
+    arguments:
+      - '@http_kernel'
+

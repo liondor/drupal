@@ -2,16 +2,16 @@
 
 
 namespace Drupal\session_handler\Controller;
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal;
-use \Drupal\node\Entity\Node;
-use \Drupal\file\Entity\File;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\file\Entity\File;
+use Drupal\node\Entity\Node;
 use Drupal\session_handler\Actions\SessionOpen;
 use Drupal\session_handler\Actions\SessionVerify;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class SessionHandlerController extends ControllerBase
 {
@@ -29,7 +29,8 @@ class SessionHandlerController extends ControllerBase
     $ticket=Drupal::request()->query->get('ticket');
     if($ticket) {
       $id = $this->sessionOpen->openSession($ticket);
-      return new Response($id);
+
+      return new Response(json_encode($id));
     }
     return new Response(null);
 

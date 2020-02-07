@@ -87,9 +87,35 @@ export function getImageURL(jsonObjectRelation, functionToSaveURL) {
   }
 }
 
-export function connectToGLPI(username, password, setToken) {
-  fetch(BASE_URL + 'GLPI?connect=1'
+export function connectToGLPI(username, password, setResponse) {
+  /*let login = {"username" : username, "password" : password }
+  var myInit = {
+    method: 'POST',
+    body : JSON.stringify(login)
+  };
+
+  */
+  fetch(BASE_URL + 'glpi?username=' + username + '&password=' + password
   ).then(response => response.json()
-  ).then(responseJSON => responseJSON.session_token
-  ).then(token => setToken(token))
+  ).then(responseJSON => setResponse(responseJSON)
+    /* ).then(responseJSON => {console.log(responseJSON+"->"+responseJSON.session_token ); return responseJSON.session_token}
+     ).then(sessionToken => {setToken(sessionToken);console.log('The token has been set !'); return(sessionToken)}
+     */).catch(error => console.warn(error))
+}
+
+export function createTicket(corps, setResponse) {
+  fetch(BASE_URL + 'glpi?',
+    {
+      method: 'POST',
+      body: JSON.stringify(corps)
+    }).then(result => {
+      console.log(result.text());
+      return result.json()
+    }
+  ).then(resultJSON => {
+      console.log(resultJSON);
+      setResponse(resultJSON)
+    }
+  ).catch(error => console.warn(error))
+
 }

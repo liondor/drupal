@@ -416,7 +416,8 @@ input[type="text"] {
 }
 
 #annuaire {
-  grid-area: annuaire;
+  /*grid-area: annuaire;
+*/
 }
 
 #annuaireBackground {
@@ -459,13 +460,17 @@ input[type="text"] {
   font-size: 124%;
 }
 #contact {
-  grid-template-columns: 1fr 1fr 1fr 40px;
+  /* grid-template-columns: 1fr 1fr 1fr 40px;
+  */
   justify-items: center;
-  grid-template-areas: "form form annuaire ." "carte carte carte .";
+  grid-row-gap: 3vh;
+  /* grid-template-areas: "form form annuaire ." "carte carte carte .";
+ */
 }
 
 .contact_Map {
-  grid-area: carte;
+  /*grid-area: carte;
+*/
 }
 
 .effect {
@@ -510,10 +515,11 @@ input[type="text"] {
 #formulaire {
   padding: 5vw 1vw;
   display: grid;
-  grid-template-columns: 20% 80%;
-  width: 50vw;
+  grid-template-columns: 1fr;
+
   row-gap: 3vw;
-  grid-area: form;
+  /* grid-area: form;
+ */
 }
 
 #formulaire input {
@@ -521,7 +527,6 @@ input[type="text"] {
 }
 
 #formButton {
-  grid-column: 1/span 2;
   justify-self: center;
 }
 
@@ -546,6 +551,12 @@ footer h4, footer h6 {
 
 #footerLogoContact {
   text-align: center;
+}
+
+input:focus,
+textarea:focus {
+  outline: 0;
+  border-color: var(--tertiary-color);
 }
 #listeOutils {
   width: 100%;

@@ -1,6 +1,6 @@
-show_projets:
+glpi_handler:
   path: '/glpi'
   defaults:
-    _controller: 'Drupal\glpi\Controller\GlpiController::handle'
+    _controller: 'Drupal\glpi\Controller\GlpiController::handleConnexion'
   requirements:
     _permission: 'access content'
