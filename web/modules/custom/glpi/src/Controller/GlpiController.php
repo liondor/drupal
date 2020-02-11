@@ -47,6 +47,7 @@ class GlpiController extends ControllerBase
       'Session-Token' => $session_token,
       'App-Token' => $token,
     ]]);
+
     if (isset($user) && isset($password)) {
       $base = base64_encode($user . ':' . $password);
       $loginRequest = $this->connexion->login($token, $base);
@@ -68,26 +69,32 @@ class GlpiController extends ControllerBase
     } elseif (isset($categorie) && isset($session_token)) {
       $response = $client->request('GET', $URL_GLPI . 'ITILCategory/');
       $resultCategory = $response->getContent(false);
-      //Récupération des noms des catégories
-      $resultCategoryDecoded = json_decode($resultCategory, true);
-      $filteredResults = array_filter($resultCategoryDecoded, function ($obj) {
-        return $obj["is_incident"];
-      });
-      $filteredResults = array_values($filteredResults);
-      for ($i = 0; $i < count($filteredResults); $i++) {
-        $resultCategoryNames[$filteredResults[$i]["id"]]["name"] = $filteredResults[$i]["completename"];
-        $resultCategoryNames[$filteredResults[$i]["id"]]["id"] = $filteredResults[$i]["id"];
-        $resultCategoryNames[$filteredResults[$i]["id"]]["category"] = $filteredResults[$i]["itilcategories_id"];
+      if ($response->getStatusCode() == 200) {
+        //Récupération des noms des catégories
+        $resultCategoryDecoded = json_decode($resultCategory, true);
+        $filteredResults = array_filter($resultCategoryDecoded, function ($obj) {
+          return $obj["is_incident"];
+        });
+        $filteredResults = array_values($filteredResults);
+        for ($i = 0; $i < count($filteredResults); $i++) {
+          $resultCategoryNames[$filteredResults[$i]["id"]]["name"] = $filteredResults[$i]["completename"];
+          $resultCategoryNames[$filteredResults[$i]["id"]]["id"] = $filteredResults[$i]["id"];
+          $resultCategoryNames[$filteredResults[$i]["id"]]["category"] = $filteredResults[$i]["itilcategories_id"];
+
+        }
+
+        return new Response(json_encode($resultCategoryNames));
+      } else {
+        return new Response($resultCategory);
 
       }
-      return new Response(json_encode($resultCategoryNames));
     } elseif (isset($session_token)) {
       /* || Test pour l'acquisition et la manipulation des données du formulaire
           $type = \Drupal::request()->getContent();
           $responseObject = json_decode($type, true);
           $test["test"] = $responseObject['type'] . $responseObject['titre'];
 
-          /* || Test pour déterminer le format à suivre pour créer un ticket */
+          /* || Test pour déterminer le format à suivre pour créer un ticket
       $mockFormArray["name"] = "Ticket créé depuis Drupal avec du contenu cette fois ci";
       $mockFormArray["content"] = "Contenu créé depuis Drupal";
       //TODO:Mettre en place une vérification du contenu du formulaire du client
@@ -127,12 +134,11 @@ class GlpiController extends ControllerBase
 
 
       /* || Test de l'emboitement UI/backend*/
-      $response = $client->request('GET', $URL_GLPI . 'ITILCategory/');
-      $type = \Drupal::request()->getContent();
-      $responseObject = json_decode($type, true);
-      $payload["name"] = $responseObject["titre"];
-      $payload["content"] = $responseObject["content"];
-      $payload["itilcategories_id"] = $responseObject["categorie"];
+      $form = \Drupal::request()->getContent();
+      $responseArray = json_decode($form, true);
+      $payload["name"] = $responseArray["titre"];
+      $payload["content"] = $responseArray["content"];
+      $payload["itilcategories_id"] = $responseArray["categorie"];
       $jsonArray["input"] = $payload;
       $input = json_encode($jsonArray);
       $createTicket = $client->request('POST', $URL_GLPI . 'Ticket/', [
