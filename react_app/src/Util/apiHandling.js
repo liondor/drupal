@@ -103,14 +103,15 @@ export function connectToGLPI(username, password, setResponse) {
      */).catch(error => console.warn(error))
 }
 
-export function createTicket(corps, setResponse) {
-  fetch(BASE_URL + 'glpi?',
+export function createTicket(corps, token, setResponse) {
+  console.log("Calling createTicket with token=" + token)
+  fetch(BASE_URL + 'glpi?sessionToken=' + token,
     {
       method: 'POST',
       body: JSON.stringify(corps)
     }).then(result => {
-      console.log(result.text());
-      return result.json()
+    // console.log(result.text());
+    return result.clone().json()
     }
   ).then(resultJSON => {
       console.log(resultJSON);

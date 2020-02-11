@@ -25,7 +25,7 @@ class GLPIConnect
       'Authorization' => 'Basic ' . $loginInfo64,
       'App-Token' => $app_token,
     ]]);
-    $response = $client->request('GET', 'http://coulirou.univ-antilles.fr/apirest.php/initSession/');
+    $response = $client->request('GET', 'http://localhost:80/glpi/apirest.php/initSession/');
     // $response=$client->request('GET','https://jsonplaceholder.typicode.com/todos/1');
     return $response->toArray(false);
   }
@@ -38,7 +38,7 @@ class GLPIConnect
       'Session-Token' => $sessionToken,
       'App-Token' => $appToken,
     ]]);
-    $response = $client->request('GET', 'http://coulirou.univ-antilles.fr/apirest.php/killSession/');
+    $response = $client->request('GET', 'http://localhost:80/glpi/apirest.php/killSession/');
     $statusCode = $response->getStatusCode();
     if ($statusCode == 200) {
       $result['status'] = $statusCode;
