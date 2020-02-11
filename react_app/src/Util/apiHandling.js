@@ -117,6 +117,6 @@ export function createTicket(corps, token, setResponse) {
       console.log(resultJSON);
       setResponse(resultJSON)
     }
-  ).catch(error => console.warn(error))
+  ).catch(error => console.warn(error.message))
 
 }

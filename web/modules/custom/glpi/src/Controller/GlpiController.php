@@ -40,11 +40,12 @@ class GlpiController extends ControllerBase
     $categorie = Drupal::request()->query->get('categorie');
     $session_token = Drupal::request()->query->get('sessionToken');
     $token = 'Hr9vwPbFZRlRtUJ5nUVKIxWPDUWscv6p0Bbt0wxb';
+    $URL_GLPI = 'http://localhost:80/glpi/apirest.php/';
 
     $client = HttpClient::create(['headers' => [
       'Content-Type' => 'application/json',
-      'Session-Token' => "405b63607529ba4b21aa5d72fbe1abc4",
-      'App-Token' => "Hr9vwPbFZRlRtUJ5nUVKIxWPDUWscv6p0Bbt0wxb",
+      'Session-Token' => $session_token,
+      'App-Token' => $token,
     ]]);
     if (isset($user) && isset($password)) {
       $base = base64_encode($user . ':' . $password);
@@ -65,7 +66,7 @@ class GlpiController extends ControllerBase
       $resultJSON = json_encode($result);
       return new Response($resultJSON);
     } elseif (isset($categorie) && isset($session_token)) {
-      $response = $client->request('GET', 'http://localhost:80/glpi/apirest.php/ITILCategory/');
+      $response = $client->request('GET', $URL_GLPI . 'ITILCategory/');
       $resultCategory = $response->getContent(false);
       //Récupération des noms des catégories
       $resultCategoryDecoded = json_decode($resultCategory, true);
@@ -126,7 +127,7 @@ class GlpiController extends ControllerBase
 
 
       /* || Test de l'emboitement UI/backend*/
-      $response = $client->request('GET', 'http://localhost:80/glpi/apirest.php/ITILCategory/');
+      $response = $client->request('GET', $URL_GLPI . 'ITILCategory/');
       $type = \Drupal::request()->getContent();
       $responseObject = json_decode($type, true);
       $payload["name"] = $responseObject["titre"];
@@ -134,7 +135,7 @@ class GlpiController extends ControllerBase
       $payload["itilcategories_id"] = $responseObject["categorie"];
       $jsonArray["input"] = $payload;
       $input = json_encode($jsonArray);
-      $createTicket = $client->request('POST', 'http://localhost:80/glpi/apirest.php/Ticket/', [
+      $createTicket = $client->request('POST', $URL_GLPI . 'Ticket/', [
         'body' => $input]);
       $creationResult = $createTicket->toArray(false);
       $killResult = $this->connexion->kill($token, $session_token);
