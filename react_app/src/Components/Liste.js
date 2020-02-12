@@ -64,6 +64,7 @@ function Liste(props) {
     //   console.log(images);
     let pairedArray = content.map(categorie => {
       let id
+      let type
       let imageID
       let titre
       let content
@@ -80,13 +81,14 @@ function Liste(props) {
       }
       id = categorie.id
       titre = categorie.attributes.title
+      type = categorie.type.substring(6)
       //   console.log(categorie.attributes)
       if (categorie.attributes.field_description) {
         content = categorie.attributes.field_description.value
       } else {
         content = ""
       }
-      result = {id: id, titre: titre, description: content, urlImage: imageURL}
+      result = {id: id, titre: titre, description: content, urlImage: imageURL, type: type}
       return result;
     })
     return pairedArray
@@ -95,16 +97,29 @@ function Liste(props) {
   function renderChild() {
     let result = formattedCategories
     if (result !== null & content_type !== undefined) {
-      if (props.type === 'outils')
-        return result.map(item => (
-          <Outil key={item.id} id={item.id} titre={item.titre} description={item.description}
-                 urlImage={item.urlImage}>Test</Outil>))
-      if (props.type === 'conseils' || props.type === 'articles')
-        return result.map(item => (
-          <Carte key={item.id} id={item.id} titre={item.titre} description={item.description}
-                 urlImage={item.urlImage}>Test</Carte>))
-    } else
+      return result.map(item => {
+        let propriete = {
+          key: item.id,
+          id: item.id,
+          titre: item.titre,
+          description: item.description,
+          urlImage: item.urlImage,
+          type: item.type
+        }
+        if (props.type === 'outils') {
+          return (<Outil {...propriete}>Test</Outil>)
+        }
+        if (props.type === 'conseils' || props.type === 'articles') {
+          return (<Carte {...propriete} >Test</Carte>)
+        } else {
+          return (<p>Error when fetching content</p>)
+        }
+      })
+
+    } else {
       return <CircularProgress/>
+
+    }
   }
 
   return (

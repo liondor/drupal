@@ -17,9 +17,9 @@ export function getItem(type, id, functionToKeepResults, functionToPreventSevera
 }
 
 
-export function extractData(jsonObjectData, functiontoKeeptheImagUrl, ...contentILookFor) {
+export function extractData(jsonObjectData, functionToPreventSeveralCall, functionToKeepTheImageURL, ...contentILookFor) {
   let resultContainer = {};
-
+  functionToPreventSeveralCall();
   for (let i = 0; i < contentILookFor.length; i++) {
     switch (contentILookFor[i]) {
       case 'id' :
@@ -39,8 +39,8 @@ export function extractData(jsonObjectData, functiontoKeeptheImagUrl, ...content
         }
         break;
       case'image' :
-        if (typeof functiontoKeeptheImagUrl !== "undefined" && typeof jsonObjectData.relationships !== "undefined") {
-          getImageURL(jsonObjectData.relationships, functiontoKeeptheImagUrl)
+        if (typeof functionToKeepTheImageURL !== "undefined" && typeof jsonObjectData.relationships !== "undefined") {
+          getImageURL(jsonObjectData.relationships, functionToKeepTheImageURL)
         }
         break;
       default :

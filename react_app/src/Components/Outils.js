@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
  * */
 const Outil = (props) => {
     return (
-      <Link className={"outil whiteText"} to={"/outil?id=' + props.id + \"&type=\" + props.type}"}>
+      <Link className={"outil whiteText"} to={'/outil?id=' + props.id + '&type=' + props.type}>
             <div className={"outilImageTitre"}>
                 <img src={"http://localhost:8900" + props.urlImage}/>
                 {/*
