@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 export default function Carte(props) {
 
         return (
-          <Link className={"outil whiteText"} to={'/outil?id=' + props.id + '&type=' + props.type}>
+          <Link to={'/outil?id=' + props.id + '&type=' + props.type}>
             <div className={"carte"}>
                 {
                     props.urlImage ? <img alt={"Photo de l'université"} src={"http://localhost:8900" + props.urlImage}
