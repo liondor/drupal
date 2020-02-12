@@ -110,7 +110,6 @@ export function createTicket(corps, token, setResponse) {
       method: 'POST',
       body: JSON.stringify(corps)
     }).then(result => {
-    // console.log(result.text());
     return result.clone().json()
     }
   ).then(resultJSON => {

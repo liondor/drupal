@@ -48,7 +48,6 @@ class GLPIConnect
       $result['message'] = $response->toArray(false)['message'];
       return $result;
     }
-    return $response->getStatusCode();
   }
 
 

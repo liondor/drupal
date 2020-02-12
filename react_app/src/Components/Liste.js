@@ -63,6 +63,7 @@ function Liste(props) {
     }
     //   console.log(images);
     let pairedArray = content.map(categorie => {
+      let id
       let imageID
       let titre
       let content
@@ -77,6 +78,7 @@ function Liste(props) {
       } else {
         imageURL = "/api/sites/default/files/default_images/question-mark.png"
       }
+      id = categorie.id
       titre = categorie.attributes.title
       //   console.log(categorie.attributes)
       if (categorie.attributes.field_description) {
@@ -84,7 +86,7 @@ function Liste(props) {
       } else {
         content = ""
       }
-      result = {titre: titre, description: content, urlImage: imageURL}
+      result = {id: id, titre: titre, description: content, urlImage: imageURL}
       return result;
     })
     return pairedArray
@@ -95,11 +97,11 @@ function Liste(props) {
     if (result !== null & content_type !== undefined) {
       if (props.type === 'outils')
         return result.map(item => (
-          <Outil id={item.titre + item.urlImage} titre={item.titre} description={item.description}
+          <Outil key={item.id} id={item.id} titre={item.titre} description={item.description}
                  urlImage={item.urlImage}>Test</Outil>))
       if (props.type === 'conseils' || props.type === 'articles')
         return result.map(item => (
-          <Carte id={item.titre + item.urlImage} titre={item.titre} description={item.description}
+          <Carte key={item.id} id={item.id} titre={item.titre} description={item.description}
                  urlImage={item.urlImage}>Test</Carte>))
     } else
       return <CircularProgress/>

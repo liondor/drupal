@@ -1,10 +1,14 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
-
+/**TODO: Faire passer l'id de la node à "Outils", et renvoyer vers "Présentation" si l'utilisateur clique.
+ *
+ *
+ *
+ * */
 const Outil = (props) => {
     return (
-        <Link className={"outil whiteText"} to={"/exempleOutil"}>
+      <Link className={"outil whiteText"} to={"/outil?id=' + props.id + \"&type=\" + props.type}"}>
             <div className={"outilImageTitre"}>
                 <img src={"http://localhost:8900" + props.urlImage}/>
                 {/*

@@ -77,7 +77,6 @@ function Formulaire() {
 
   function appendOption() {
     console.log('On charge les catégories !')
-    console.log(categorie, typeof categorie)
     return Object.entries(categorie).map(([cle, objet]) => (<option key={cle} value={cle}> {objet.name}</option>))
   }
 

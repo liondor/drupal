@@ -66,27 +66,44 @@ class GlpiController extends ControllerBase
       }
       $resultJSON = json_encode($result);
       return new Response($resultJSON);
-    } elseif (isset($categorie) && isset($session_token)) {
-      $response = $client->request('GET', $URL_GLPI . 'ITILCategory/');
-      $resultCategory = $response->getContent(false);
-      if ($response->getStatusCode() == 200) {
-        //Récupération des noms des catégories
-        $resultCategoryDecoded = json_decode($resultCategory, true);
-        $filteredResults = array_filter($resultCategoryDecoded, function ($obj) {
-          return $obj["is_incident"];
-        });
-        $filteredResults = array_values($filteredResults);
-        for ($i = 0; $i < count($filteredResults); $i++) {
-          $resultCategoryNames[$filteredResults[$i]["id"]]["name"] = $filteredResults[$i]["completename"];
-          $resultCategoryNames[$filteredResults[$i]["id"]]["id"] = $filteredResults[$i]["id"];
-          $resultCategoryNames[$filteredResults[$i]["id"]]["category"] = $filteredResults[$i]["itilcategories_id"];
+    }/*|| Gestion de la récupération des catégories*/
+    elseif (isset($categorie) && isset($session_token)) {
+      $responseProfiles = $client->request('GET', $URL_GLPI . 'getMyProfiles/');
+      if ($responseProfiles->getStatusCode() == 200) {//Permet de vérifier que le token fourni est valide
+        //Connexion avec l'user 'API' :
+        $baseAPI = base64_encode("categ:categ");
+        $loginRequest = $this->connexion->login($token, $baseAPI);
+        $sessionTokenAPI = $loginRequest['session_token'];
+        $clientAPI = HttpClient::create(['headers' => [
+          'Content-Type' => 'application/json',
+          'Session-Token' => $sessionTokenAPI,
+          'App-Token' => $token,
+        ]]);
+        $responseAPI = $clientAPI->request('GET', $URL_GLPI . 'ITILCategory/');
+        $resultCategory = $responseAPI->getContent(false);
+        $killStatus = $this->connexion->kill($token, $sessionTokenAPI);
+        if ($responseAPI->getStatusCode() == 200) {
+          //Récupération des noms des catégories
+          $resultCategoryDecoded = json_decode($resultCategory, true);
+          $filteredResults = array_filter($resultCategoryDecoded, function ($obj) {
+            return $obj["is_incident"];
+          });
+          $filteredResults = array_values($filteredResults);
+          for ($i = 0; $i < count($filteredResults); $i++) {
+            $resultCategoryNames[$filteredResults[$i]["id"]]["name"] = $filteredResults[$i]["completename"];
+            $resultCategoryNames[$filteredResults[$i]["id"]]["id"] = $filteredResults[$i]["id"];
+            $resultCategoryNames[$filteredResults[$i]["id"]]["category"] = $filteredResults[$i]["itilcategories_id"];
+
+          }
+          $resultCategoryNames["kill"] = $killStatus;
+
+          return new Response(json_encode($resultCategoryNames));
+        } else {
+          return new Response($resultCategory);
 
         }
-
-        return new Response(json_encode($resultCategoryNames));
       } else {
-        return new Response($resultCategory);
-
+        return new Response($responseProfiles->getContent(false));
       }
     } elseif (isset($session_token)) {
       /* || Test pour l'acquisition et la manipulation des données du formulaire
@@ -143,9 +160,13 @@ class GlpiController extends ControllerBase
       $input = json_encode($jsonArray);
       $createTicket = $client->request('POST', $URL_GLPI . 'Ticket/', [
         'body' => $input]);
-      $creationResult = $createTicket->toArray(false);
-      $killResult = $this->connexion->kill($token, $session_token);
-
+      if ($createTicket->getStatusCode() == 201) {
+        $creationResult = $createTicket->toArray(false);
+        $kill = $this->connexion->kill($token, $session_token);
+        $creationResult["kill"] = $kill['status'];
+      } else {
+        $creationResult = $createTicket->getContent(false);
+      }
       return new Response(json_encode($creationResult));
 
     } else {
