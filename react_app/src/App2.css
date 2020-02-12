@@ -21,11 +21,15 @@ a {
 body {
   font-family: 'Source Sans Pro', 'Roboto', sans-serif;
   text-rendering: optimizeLegibility;
-  padding: 5px;
+  padding: 2em;
   height: 100%;
   width: 100%;
   background-color: #F2F4FF;
 
+}
+
+img {
+  width: 100%;
 }
 button {
   font-size: .9rem;
@@ -381,13 +385,10 @@ input[type="text"] {
   height: auto;
 }
 
-.accueilText {
- /* grid-area: text;*/
-  text-align: left;
-}
 
 .accueilText > p {
   font-size: small;
+  width: 100vw;
 }
 
 .accueilText > h2 {
