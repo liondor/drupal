@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import parse from 'html-react-parser'
 
 /**TODO: Faire passer l'id de la node à "Outils", et renvoyer vers "Présentation" si l'utilisateur clique.
  *
@@ -7,10 +8,24 @@ import {Link} from "react-router-dom";
  *
  * */
 const Outil = (props) => {
+  var linkParameters = {}
+
+  if (!props.type.localeCompare('categorie')) {
+    linkParameters = {
+      className: "outil whiteText",
+      to: '/categorie?id=' + props.id + '&type=' + props.type,
+    }
+  } else {
+    linkParameters = {
+      className: "outil whiteText",
+      to: '/outil?id=' + props.id + '&type=' + props.type,
+    }
+
+  }
     return (
-      <Link className={"outil whiteText"} to={'/outil?id=' + props.id + '&type=' + props.type}>
+      <Link {...linkParameters} >
             <div className={"outilImageTitre"}>
-                <img src={"http://localhost:8900" + props.urlImage}/>
+              <img src={"http://localhost:8900" + props.urlImage} style={{width: "auto"}}/>
                 {/*
                 <div className={"outilImageContainer whiteText"}>
 
@@ -27,7 +42,7 @@ const Outil = (props) => {
                 </div>
             </div>
             <div className={"outilDescription lessImportantText"}>
-                <p>{props.description}</p>
+              {props.description ? parse(props.description) : ""}
             </div>
 
         </Link>

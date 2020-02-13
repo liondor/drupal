@@ -15,7 +15,12 @@
 
 a {
   text-decoration: none;
-  color: var(--fourth-color);
+  color: var(--tertiary-color);
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--tertiary-color);
 }
 
 body {
@@ -57,7 +62,6 @@ ul {
   font-weight: 700;
 }
 .conteneur {
-  padding-top: 2em;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
   grid-column-gap: 1rem;
   grid-row-gap: 5vh;
@@ -561,6 +565,7 @@ textarea:focus {
 }
 #listeOutils {
   width: 100%;
+  padding-top: 2em;
 }
 .outil {
   display: grid;

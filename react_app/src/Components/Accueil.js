@@ -21,7 +21,7 @@ const Accueil = (props) => {
                 <div className={"accueilOutilsSubWrapper"}>
                     <h2 className={"titreSection "}>Outils numériques populaires </h2>
                     <div className={"accueilOutils"}>
-                        <Liste token={props.token} limit={3} type={'outils'}/>
+                      <Liste token={props.token} limit={3} type={'categorie_outils'}/>
                     </div>
                     <Bouton marge={"30px"} contenu={"Plus d'outils"} type={"main"} arrow={true}/>
                 </div>

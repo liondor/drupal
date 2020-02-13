@@ -47,11 +47,14 @@ class App extends Component {
                             <Route path="/outils">
                                 <h1 className={"titreSection"}>Outils numériques et prestations offertes par
                                     l'université</h1>
-                                <Liste token={this.state.token} type={'outils'}/>
+                              <Liste token={this.state.token} type={'categorie_outils'}/>
                             </Route>
                           <Route path="/outil">
                             <Presentation/>
-                            </Route>
+                          </Route>
+                          <Route path="/categorie">
+                            <Liste token={this.state.token} type={'outils'}/>
+                          </Route>
                             <Route path="/missions">
                                 <h1 className={"titreSection"}> Nos missions</h1>
                             </Route>
