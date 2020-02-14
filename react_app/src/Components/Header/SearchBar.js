@@ -38,7 +38,8 @@ function SearchBar(props) {
                  onChange={handleChange}/>
             <label className={'headerSearchSubmitWrapper'}>
               <input type={"submit"} className={'headerSearchSubmit'}/>
-              <Link to={"/recherche?q=" + query} onClick={props.reset}> <Bouton type={'main'} contenu={<MdSearch/>}
+              <Link to={"/recherche?q=" + query} onClick={props.reset}> <Bouton type={"main"} contenu={<MdSearch/>}
+                                                                                modal={props.modal}
                                                                                 onClick={props.toggle}/></Link>
             </label>
         </div>

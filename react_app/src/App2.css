@@ -36,6 +36,7 @@ body {
 img {
   width: 100%;
 }
+
 button {
   font-size: .9rem;
   font-weight: 700;
@@ -61,6 +62,7 @@ ul {
 .bold {
   font-weight: 700;
 }
+
 .conteneur {
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
   grid-column-gap: 1rem;
@@ -68,6 +70,7 @@ ul {
   justify-items: center;
   align-content: start;
 }
+
 .goldenHover:before {
   content: "";
   position: absolute;
@@ -111,14 +114,15 @@ ul {
   top: 0;
   z-index: -1;
 }
-.flex
-{
+
+.flex {
   display: flex;
 }
-.grid
-{
+
+.grid {
   display: grid;
 }
+
 .grid2 {
   width: 100%;
   grid-template-columns: repeat(2, minmax(14rem, 1fr));
@@ -168,15 +172,19 @@ ul {
 .optionIcone {
   font-size: 26vh;
 }
+
 .majuscule {
   text-transform: uppercase;
 }
+
 .offset {
   height: 0;
 }
+
 .offsetSticky {
   height: 15em;
 }
+
 .sticky {
   position: fixed;
   z-index: 10;
@@ -189,11 +197,13 @@ ul {
   box-shadow: 0 2px 15px #999;
 
 }
+
 .styleSVG {
   display: inline-flex;
   background-color: var(--main-color);
   color: white;
 }
+
 .titreSection {
   font-weight: 400;
   font-size: 1.625rem;
@@ -216,7 +226,7 @@ ul {
 /* || TOUT LE SITE */
 
 header {
-
+  margin-bottom: 2em;
 }
 
 .header {
@@ -276,6 +286,7 @@ input[type="text"] {
   border-radius: 4px;
   width: 100%;
 }
+
 .logo {
   width: 100%;
   min-width: 15rem;
@@ -293,6 +304,10 @@ input[type="text"] {
   color: var(--tertiary-color);
 }
 
+#menuBig {
+
+}
+
 .menu_disposition {
   grid-area: menu;
   align-content: center;
@@ -300,10 +315,12 @@ input[type="text"] {
   justify-self: center;
   border-radius: 30%;
 }
+
 .menu_disposition > svg {
   font-size: x-large;
   padding: 0.5em;
 }
+
 .menu_disposition:hover {
   cursor: pointer;
 }
@@ -361,7 +378,6 @@ input[type="text"] {
 }
 
 
-
 /* || ELEMENTS SPECIFIQUES */
 
 
@@ -401,14 +417,16 @@ input[type="text"] {
 
 .accueilPhoto {
   justify-self: center;
- /* grid-area: photo;*/
+  /* grid-area: photo;*/
   width: 45%;
   height: auto;
 }
+
 #mapBackground {
   z-index: 1;
   user-select: none
 }
+
 #testMap {
   margin-top: 5vw;
   border: solid 5px var(--secondary-color);
@@ -416,6 +434,7 @@ input[type="text"] {
   position: relative;
 
 }
+
 #photoAccueil {
   width: 100%;
 }
@@ -464,6 +483,7 @@ input[type="text"] {
   font-weight: 400;
   font-size: 124%;
 }
+
 #contact {
   /* grid-template-columns: 1fr 1fr 1fr 40px;
   */
@@ -563,15 +583,17 @@ textarea:focus {
   outline: 0;
   border-color: var(--tertiary-color);
 }
+
 #listeOutils {
   width: 100%;
   padding-top: 2em;
 }
+
 .outil {
   display: grid;
   grid-template-rows: 2fr 1fr;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
- height: 15em;
+  height: 15em;
   width: 15em;
   justify-items: center;
   align-content: center;
@@ -651,11 +673,11 @@ textarea:focus {
   margin: 8vh 0;
   display: grid;
   width: 100%;
-  grid-template-columns:  minmax(3em,30em);
-  grid-template-rows : min-content 1fr;
+  grid-template-columns: minmax(3em, 30em);
+  grid-template-rows: min-content 1fr;
   justify-content: center;
-/*  grid-template-areas: "photo photo . text text text";
-*/
+  /*  grid-template-areas: "photo photo . text text text";
+  */
 }
 
 .projets {
@@ -670,7 +692,12 @@ textarea:focus {
   width: 100%;
   grid-template-columns: auto auto;
   align-content: center;
- /* grid-area: searchBar;*/
+  justify-content: center;
+  /* grid-area: searchBar;*/
+}
+
+.searchResult {
+  text-align: left;
 }
 
 .sideMenu > * {
@@ -701,25 +728,37 @@ textarea:focus {
 
 /*320, 480, 640, 768, 992, 1100, and 1200px*/
 
-@media (min-width: 480px)
-{
+@media (min-width: 480px) {
 
 }
-@media (min-width: 640px)
-{
 
-}@media (min-width: 768px)
-{
-
-}@media (min-width: 992px)
-{
+@media (min-width: 640px) {
 
 }
-@media (min-width: 1100px)
-{
+
+@media (min-width: 768px) {
+  .header {
+    grid-template-areas: "logo logo searchBar" "menu menu menu ";
+  }
+
+  .menu {
+    font-size: 3vw;
+  }
+
+  #menuBig {
+    margin: 1em;
+    display: grid;
+  }
+}
+
+@media (min-width: 992px) {
 
 }
-@media (min-width: 1200px)
-{
+
+@media (min-width: 1100px) {
+
+}
+
+@media (min-width: 1200px) {
 
 }

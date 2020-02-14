@@ -24,7 +24,7 @@ const GridTwo = (props) => {
 
     }, [props.token.access_token])
     return (
-        <div id={"grid2"} className={"grid2 grid"}>
+      <div id={"grid2"} className={" grid"}>
             {renderChild()}
         </div>
     );

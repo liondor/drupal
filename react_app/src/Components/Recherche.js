@@ -24,13 +24,24 @@ const Recherche = () => {
       ).then(
         listOfNodes => {
           var temp = listOfNodes.map(function (node) {
-              return ({
-                type: node.type,
-                titre: node.attributes.title,
-                id: node.id,
-              })
+            var data = {
+              type: node.type,
+              titre: node.attributes.title,
+              id: node.id,
+              date: node.attributes.created,
+            }
+            if (node.attributes.body) {
+              if (node.attributes.body.value) {
+                data.content = node.attributes.body.value;
+              }
+            } else if (node.description) {
+              data.content = node.description;
+            }
+
+            return (data)
             }
           )
+
           return temp
         }
       ).then(res => {
@@ -62,10 +73,12 @@ const Recherche = () => {
     if (results !== null) {
 
       researchResults = results.map(node => <ListLinks key={node.id} id={node.id} titre={node.titre}
+                                                       content={node.content} date={node.date}
                                                        type={node.type.substring(6)}/>)
     }
     return (
       <>
+        <hr/>
         {searchDone.current ? researchResults : <CircularProgress/>}
       </>
     );

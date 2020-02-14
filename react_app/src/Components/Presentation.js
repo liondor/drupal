@@ -39,7 +39,7 @@ const Presentation = (props) => {
       <h1 className={"outilPresentationTitre"}> {titre}</h1>
 
       <Test/>
-      {image ? <img src={image}/> : <CircularProgress/>}
+      {image ? <img src={image}/> : ""}
       {contenu !== "" ? parse(contenu) : (
         <div style={{display: "grid", justifyItems: "center"}}><CircularProgress/></div>)}
 

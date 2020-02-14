@@ -52,7 +52,7 @@ const SmallHeader = () => {
         </div>
 
         <div className={"searchbar_container"}>
-          <SearchBar toggle={openModal}/>
+          <SearchBar toggle={openModal} modal={true}/>
         </div>
       </div>)
   };

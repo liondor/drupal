@@ -16,7 +16,7 @@ export default class BigHeader extends React.Component {
                         <SearchBar/>
                     </div>
                     <div className={"menu_disposition"}>
-                        <div className={"grid3 gridCenter  majuscule"}>
+                      <div id={"menuBig"} className={"grid3 gridCenter  majuscule"}>
                             <div style={{position: "relative"}}>
                                 <Link className={"menu goldenHover"} to="/outilsMissions">
                                     Outils numériques & nos missions

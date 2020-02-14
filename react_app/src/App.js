@@ -69,6 +69,9 @@ class App extends Component {
                                 <h1 className={"titreSection"}>Nos projets</h1>
                                 <Projet/>
                             </Route>
+                          <Route path="/news">
+                            <Liste token={this.state.token} type={"articles"}/>
+                          </Route>
                             <Route path="/login">
                                 <Login/>
                             </Route>
@@ -127,36 +130,36 @@ class App extends Component {
             console.log(this.state.database)*/
         }
 
-        componentDidMount() {
-            if (this.state.token == null) {
+  /*componentDidMount() {
+      if (this.state.token == null) {
 
-            }
-            fetch('http://localhost:8900/dsin/web/oauth/token', {
-                method: 'POST',
-                headers: {
-                    'Response-Type': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: qs.stringify({
-                    grant_type: 'password',
-                    client_id: 'fd9bc24f-9134-491c-a0d5-4700ad76e021',
-                    client_secret: 'abc123',
-                    username: 'test',
-                    password: 'test',
-                })
-            }).then((response) => response.json()).then((responseData) =>
-                this.setState({token: responseData, tokenLoaded: true},
-                ))
-            fetch('http://localhost:8900/dsin/web/jsonapi/node/conseils', {
-                method: 'GET',
-                headers: {
-                    'Autohrization': 'Beaver' + this.state.token.access_token,
-                  'Accept': 'application/vnd.api+json',
-                },
-            }).then((response) => response.json()).then((data) => this.setState({articles: data.data,}
-            ))
-        }
-
+      }
+      fetch('http://localhost:8900/dsin/web/oauth/token', {
+          method: 'POST',
+          headers: {
+              'Response-Type': 'application/json',
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: qs.stringify({
+              grant_type: 'password',
+              client_id: 'fd9bc24f-9134-491c-a0d5-4700ad76e021',
+              client_secret: 'abc123',
+              username: 'test',
+              password: 'test',
+          })
+      }).then((response) => response.json()).then((responseData) =>
+          this.setState({token: responseData, tokenLoaded: true},
+          ))
+      fetch('http://localhost:8900/dsin/web/jsonapi/node/conseils', {
+          method: 'GET',
+          headers: {
+              'Autohrization': 'Beaver' + this.state.token.access_token,
+            'Accept': 'application/vnd.api+json',
+          },
+      }).then((response) => response.json()).then((data) => this.setState({articles: data.data,}
+      ))
+  }
+*/
         loadArticles(connectionAPI) {
             console.log(connectionAPI)
             if (connectionAPI) {
