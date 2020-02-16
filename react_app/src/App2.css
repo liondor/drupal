@@ -30,6 +30,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: #F2F4FF;
+  overflow-y: scroll;
 
 }
 
@@ -188,13 +189,15 @@ ul {
 .sticky {
   position: fixed;
   z-index: 10;
-  top: 0;
+  top: 0px;
   left: 0;
   width: 100%;
   /*grid-template-areas: "logo menu menu menu searchBar";*/
   align-content: center;
   width: 100%;
+  height: 10vh;
   box-shadow: 0 2px 15px #999;
+  background-color: var(--background-color);
 
 }
 
@@ -737,17 +740,55 @@ textarea:focus {
 }
 
 @media (min-width: 768px) {
+
   .header {
-    grid-template-areas: "logo logo searchBar" "menu menu menu ";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: min-content;
+    grid-template-areas: "logo menu searchBar"
   }
 
+  .headerGridNonSticky {
+    grid-template-columns: 2fr 15em 1fr;
+    grid-template-areas: "logo . searchBar" "menu menu .";
+  }
+
+  .logo {
+    width: 40%;
+  }
+
+  .searchbar_container {
+    grid-area: searchBar;
+  }
+
+  .sticky {
+    transition: 0.5s;
+
+  }
+
+  .stickyText {
+    grid-template-columns: repeat(3, minmax(8rem, 1fr));
+    font-size: 10px;
+  }
   .menu {
-    font-size: 3vw;
+    font-size: 1.2em;
   }
 
   #menuBig {
     margin: 1em;
     display: grid;
+  }
+
+  .optionIcone {
+    font-size: 20vw;
+  }
+
+  .twoOptions h3 {
+    font-size: 4vw;
+  }
+
+  div .thumbnail {
+    height: 30vh;
+    width: 45vw;
   }
 }
 

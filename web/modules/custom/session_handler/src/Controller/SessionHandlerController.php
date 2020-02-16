@@ -36,6 +36,7 @@ class SessionHandlerController extends ControllerBase
 
   }
 
+
   public static function create(ContainerInterface $container)
   {
     $sessionOpener = $container->get('session_handler.open_session');

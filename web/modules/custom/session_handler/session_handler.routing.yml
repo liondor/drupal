@@ -3,4 +3,4 @@ session_handler:
   defaults:
     _controller: 'Drupal\session_handler\Controller\SessionHandlerController::handleSession'
   requirements:
-    _permission: 'access content'
+    _permission: 'access content delete session entity'

@@ -1,30 +1,41 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import BigHeader from "./BigHeader";
 import SmallHeader from "./SmallHeader";
 
 function HeaderHook() {
 
     const {height, width} = useWindowDimensions();
+  //var [hasScrolled, setHasScrolled] = useState(false);
+  var hasScrolled = useRef(false);
     useEffect(() => {
         if (width >= 768) {
-            const header = document.getElementById("header");
+          const header = document.getElementsByClassName("header")[0];
+          //  const header = document.getElementById("header");
+          const menu = document.getElementById("menuBig");
             const offset = document.getElementById("offset");
             const sticky = header.offsetTop;
             const scrollCallBack = window.addEventListener("scroll", () => {
                 if (window.pageYOffset > sticky) {
                     header.classList.add("sticky");
                     offset.classList.add("offsetSticky")
+                  menu.classList.add("stickyText")
+                  header.classList.remove("headerGridNonSticky");
+
+                  hasScrolled.current = true;
                 } else {
                     offset.classList.remove("offsetSticky")
                     header.classList.remove("sticky");
+                  menu.classList.remove("stickyText")
+                  header.classList.add('headerGridNonSticky')
+                  hasScrolled.current = false;
                 }
             });
             return () => {
                 window.removeEventListener("scroll", scrollCallBack);
             };
         }
-    }, []);
-    if (width >= 768) {
+    }, [width, hasScrolled]);
+  if (width >= 768 && !hasScrolled.current) {
         return (
             <>
                 <BigHeader/>

@@ -2,23 +2,28 @@
 
 namespace Drupal\hello_world\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\hello_world\ServiceFolder\HelloWorldGenerator;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal;
-use \Drupal\node\Entity\Node;
-use \Drupal\file\Entity\File;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\file\Entity\File;
+use Drupal\hello_world\ServiceFolder\HelloWorldGenerator;
+use Drupal\node\Entity\Node;
+use Drupal\session_handler\Actions\SessionVerify;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 class HelloWorldController extends ControllerBase
 {
   private $helloGenerator;
-  public function __construct(HelloWorldGenerator $helloWorldGenerator)
+  private $sessionVerify;
+
+  public function __construct(HelloWorldGenerator $helloWorldGenerator, SessionVerify $sessionVerify)
   {
     $this->helloGenerator=$helloWorldGenerator;
+    $this->sessionVerify = $sessionVerify;
   }
 
   public function sayHello()
-  {
+  {/*
     $ticket=Drupal::request()->query->get('ticket');
     $sessionCookie=Drupal::request()->query->get('session');
     if($sessionCookie && $sessionCookie)
@@ -56,14 +61,17 @@ class HelloWorldController extends ControllerBase
 
     }
 
-  $test = $this->helloGenerator->getTicket(5);
-    return new Response(nl2br($test));
+  $test = $this->helloGenerator->getTicket(5);*/
+
+
+    return new Response("Yes");
   }
 
   public static function create(ContainerInterface $container)
   {
     $helloGen = $container->get('hello_world.hello_world_generator');
-    return new static($helloGen);
+    $sessionVerifier = $container->get('session_handler.verify_session');
+    return new static($helloGen, $sessionVerifier);
   }
 }
 

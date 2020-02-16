@@ -1,9 +1,8 @@
 <?php
 
 namespace Drupal\session_handler\Actions;
-use \Drupal\node\Entity\Node;
-use DateTime;
-use DateTimeZone;
+
+use Drupal\node\Entity\Node;
 
 class SessionVerify
 {
@@ -26,8 +25,6 @@ class SessionVerify
     else{
     return false;
     }
-
-    return false;
   }
 }
 

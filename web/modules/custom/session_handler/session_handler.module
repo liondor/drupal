@@ -1,0 +1,38 @@
+<?php
+
+use Drupal\node\Entity\Node;
+
+function session_handler_cron()
+{
+  /*
+  $query = \Drupal::entityQUery('node');
+  $query->condition('type','session');
+  $listeSessionsDansBDD = $query->execute();
+  $query = \Drupal::entityQUery('node');
+  $query->condition('type','session');
+  $listeSessionsDansBDD = $query->execute();
+  foreach ($listeSessionsDansBDD as $sessionDansListe)
+  {
+    $entiteSessionComplete = Node::load($sessionDansListe);
+    if(\Drupal\session_handler\Actions\SessionVerify::isSessionValid($entiteSessionComplete->get('title')->value))
+    {
+      $entiteSessionComplete->delete();
+    }
+  }
+  */
+
+  $queryResult = \Drupal::entityQuery('node')->condition('type', 'session')->execute();
+  $nodes = Node::loadMultiple($queryResult);
+
+  foreach ($nodes as $node) {
+    $date = $node->get('field_date_expiration')->value;
+    $date = strtotime($date);
+    $dateWithCorrectTimeZone = $date - 14400;
+    $serverDate = time();
+    $result = $dateWithCorrectTimeZone - $serverDate;
+    $isSessionValid = ($result > 0);
+    if (!$isSessionValid) {
+      $node->delete();
+    }
+  }
+}

@@ -3,4 +3,9 @@ services:
     class: Drupal\session_handler\Actions\SessionVerify
   session_handler.open_session:
     class: Drupal\session_handler\Actions\SessionOpen
+  session_handler.clean_session:
+    class: Drupal\session_handler\Actions\SessionCleaner
+    arguments:
+      - '@session_handler.verify_session'
+
 
