@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
-import logo from '../Logo.png';
 import {MdMenu} from 'react-icons/md'
 import SideMenu from "./SideMenu";
 import SearchBar from "./SearchBar";
@@ -66,7 +65,7 @@ const SmallHeader = () => {
 
                 <div className={"logo_container"}>
                     <Link to="/">
-                        <img className={"logo"} src={logo}/>
+                      <img className={"logo"} src={"api/sites/default/files/default_images/Logo.png"}/>
                     </Link>
                 </div>
             </div>

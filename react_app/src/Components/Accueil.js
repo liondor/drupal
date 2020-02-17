@@ -9,11 +9,11 @@ const Accueil = (props) => {
         <div id={"accueil"}>
             <h2 className={"titreSection"}> Conseils</h2>
             <div className="conteneur fillScreen grid">
-                <Liste token={props.token} limit={3} type={'conseils'}/>
+              <Liste token={props.token} limit={3} type={'conseils'} sort={'top'}/>
             </div>
             <h2 className={"titreSection"}> Actualités</h2>
             <div className="conteneur fillScreen grid">
-                <Liste token={props.token} limit={3} type={'articles'}/>
+              <Liste token={props.token} limit={3} type={'articles'}/>
 
             </div>
           <Link to={"news"}>

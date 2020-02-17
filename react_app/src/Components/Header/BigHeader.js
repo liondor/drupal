@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import logo from '../Logo.png';
 import SearchBar from "./SearchBar";
 
 export default class BigHeader extends React.Component {
@@ -10,7 +9,8 @@ export default class BigHeader extends React.Component {
             <>
                 <div className={"header grid"} id={"header"}>
                     <div className={"logo_container"}>
-                        <Link to="/"><img className={"logo"} src={logo}/></Link>
+                      <Link to="/"><img className={"logo"}
+                                        src={"api/sites/default/files/default_images/Logo.png"}/></Link>
                     </div>
                     <div className={"searchbar_container"}>
                         <SearchBar/>

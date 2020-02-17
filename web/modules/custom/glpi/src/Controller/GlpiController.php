@@ -36,6 +36,8 @@ class GlpiController extends ControllerBase
   public function handleConnexion()
   {
     $user = Drupal::request()->query->get('username');
+
+
     $password = Drupal::request()->query->get('password');
     $categorie = Drupal::request()->query->get('categorie');
     $session_token = Drupal::request()->query->get('sessionToken');

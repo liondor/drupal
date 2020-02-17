@@ -272,7 +272,7 @@ header {
 
 header hr {
   height: 6px;
-  width: 100%;
+  width: 120%;
   background-color: var(--secondary-color);
   position: absolute;
   top: 0;
@@ -411,7 +411,7 @@ input[type="text"] {
 
 .accueilText > p {
   font-size: small;
-  width: 100vw;
+  width: 100%;
 }
 
 .accueilText > h2 {
@@ -757,7 +757,7 @@ textarea:focus {
   }
 
   .searchbar_container {
-    grid-area: searchBar;
+    /*grid-area: searchBar;*/
   }
 
   .sticky {
@@ -770,12 +770,14 @@ textarea:focus {
     font-size: 10px;
   }
   .menu {
-    font-size: 1.2em;
+    font-size: 1.14em;
   }
 
   #menuBig {
     margin: 1em;
     display: grid;
+    align-items: center;
+    grid-column-gap: 19px;
   }
 
   .optionIcone {

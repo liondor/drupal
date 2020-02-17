@@ -70,7 +70,14 @@ function Liste(props) {
       include = "include=field_image"
     }
 
-    const urlOfRequest = URL_API + contentOrTag + "/" + content_type + '?' + include + filter + field + pager;
+    var sort = ""
+    if (typeof props.sort !== 'undefined') {
+      if (!props.sort.localeCompare('top')) {
+        console.log('Comparaison marche !')
+        sort = '&sort=-field_viewcount'
+      }
+    }
+    const urlOfRequest = URL_API + contentOrTag + "/" + content_type + '?' + include + filter + field + pager + sort;
     console.log(urlOfRequest);
     fetch(urlOfRequest, {
       method: 'GET',

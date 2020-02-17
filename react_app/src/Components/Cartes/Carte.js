@@ -1,6 +1,5 @@
 import React from 'react';
 import './Carte2.css'
-import univ from '../IMG/univ.jpg'
 import {Link} from "react-router-dom";
 
 export default function Carte(props) {
@@ -10,7 +9,9 @@ export default function Carte(props) {
             <div className={"carte"}>
                 {
                     props.urlImage ? <img alt={"Photo de l'université"} src={"http://localhost:8900" + props.urlImage}
-                                          className={"thumbnail"}/> : <img alt={"Photo de l'université"} src={univ}/>
+                                          className={"thumbnail"}/> :
+                      <img alt={"Photo de l'université"} className={"thumbnail"} src={
+                        "/api/sites/default/files/default_images/universite-561821.jpg"}/>
                 }
                 <div className={"tag"}>
                     <h5 className={"goldenText "}> Etudiants Visiteurs Personnels</h5>
