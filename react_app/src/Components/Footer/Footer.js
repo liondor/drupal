@@ -8,7 +8,8 @@ const Footer = () => {
             <footer className={"grid4 grid"}>
 
                 <div id={"footerLogoContact"}>
-                  <img className={"footerLogo"} src={"api/sites/default/files/default_images/Logo.png"}/>
+                  <img alt={"Logo de la DSIN"} className={"footerLogo"}
+                       src={"api/sites/default/files/default_images/Logo.png"}/>
                   <Link to={"contact"}><Bouton type={"main"} contenu={' Contactez-nous'}/></Link>
                 </div>
                 <div>
@@ -40,5 +41,5 @@ const Footer = () => {
             </footer>
         </>);
 
-}
+};
 export default Footer
