@@ -1,23 +1,21 @@
 import React, {useRef, useState} from 'react';
 import {Paper} from "@material-ui/core";
 import Bouton from "../Bouton";
-import {connectToGLPI} from '../../Util/apiHandling'
+import {connectToGLPI} from '../../Util/apiHandling';
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 function GLPIConnect(props) {
-  var [userName, setUserName] = useState("")
-  var [password, setPassword] = useState("")
-  var loading = useRef(false)
-  var [response, setResponse] = useState(null)
+  var loading = useRef(false);
+  var [response, setResponse] = useState(null);
 
   if (response) {
     if (typeof response.session_token !== "undefined") {
       props.setToken(response.session_token)
     } else if (typeof response.login_error !== "undefined") {
-      console.log(response.login_error)
+      console.log(response.login_error);
       loading.current = false
     } else {
-      loading.current = false
+      loading.current = false;
 
       console.log("Communication error between Drupal and React")
     }
@@ -45,8 +43,8 @@ function GLPIConnect(props) {
   function handleSubmit(e) {
     e.preventDefault();
     loading.current = true;
-    var name = e.target.username.value
-    var pass = e.target.mdp.value
+    var name = e.target.username.value;
+    var pass = e.target.mdp.value;
     connectToGLPI(name, pass, setResponse)
 
   }

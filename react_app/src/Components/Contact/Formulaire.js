@@ -4,14 +4,9 @@ import GLPIConnect from "./GLPIConnect";
 import {createTicket} from "../../Util/apiHandling";
 
 function Formulaire() {
-  var [type, setType] = useState("");
   var [loading, setLoading] = useState(false);
   var [response, setResponse] = useState(null);
   var [categorie, setCategorie] = useState();
-  var [urgence, setUrgence] = useState("");
-  var [Titre, setTitre] = useState("");
-  var [Lieu, setLieu] = useState("");
-  var [Description, setDescription] = useState("");
   var [token, setToken] = useState("");
   var categoriesRequested = useRef(false);
 
@@ -71,12 +66,12 @@ function Formulaire() {
       mail: form.mail.value,
       categorie: form.categorie.value,
       content: form.content.value
-    }
+    };
     createTicket(formObject, token, setResponse)
   }
 
   function appendOption() {
-    console.log('On charge les catégories !')
+    console.log('On charge les catégories !');
     return Object.entries(categorie).map(([cle, objet]) => (<option key={cle} value={cle}> {objet.name}</option>))
   }
 
