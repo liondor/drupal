@@ -5,12 +5,16 @@ const RESSOURCE_URL = BASE_URL + "jsonapi/"
 export function getItem(type, id, functionToKeepResults, functionToPreventSeveralAPICall) {
   if (type !== undefined && id !== undefined) {
     console.log("Parameters are set ! Type :" + type + "  Id :" + id);
-    let url = RESSOURCE_URL + "/node/" + type + "/" + id
+    let url = RESSOURCE_URL + "node/" + type + "/" + id
     functionToPreventSeveralAPICall()
     fetch(url
-    ).then(result => result.json()
+    ).then(result => {
+        console.log(result.clone().json());
+        return result.json()
+      }
     ).then(result => result.data
-    ).then(result => functionToKeepResults(result))
+    ).then(result => functionToKeepResults(result)
+    ).catch(error => console.warn(error))
   } else {
     console.log("Undefined parameters ! Type :" + type + "  Id :" + id);
   }
@@ -118,4 +122,20 @@ export function createTicket(corps, token, setResponse) {
     }
   ).catch(error => console.warn(error.message))
 
+}
+
+export function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }

@@ -1,6 +1,6 @@
 import React from 'react'
-import logo from '../Logo.png'
 import {Link} from "react-router-dom";
+import Bouton from "../Bouton";
 
 const Footer = () => {
     return (
@@ -8,8 +8,8 @@ const Footer = () => {
             <footer className={"grid4 grid"}>
 
                 <div id={"footerLogoContact"}>
-                    <img className={"footerLogo"} src={logo}/>
-                    <Link to={"contact"}> Contactez-nous </Link>
+                  <img className={"footerLogo"} src={"api/sites/default/files/default_images/Logo.png"}/>
+                  <Link to={"contact"}><Bouton type={"main"} contenu={' Contactez-nous'}/></Link>
                 </div>
                 <div>
                     <div><h6 className={"goldenText"}> Guadeloupe</h6>
@@ -25,32 +25,18 @@ const Footer = () => {
                     <h4 className={"goldenText"}> Nos plateformes </h4>
                     <ul>
                         <li>
-                            <a className={"lessImportantText"}> Lien exemple</a>
+                          <a href={"http://ent.univ-antilles.fr/"} className={"lessImportantText"}> ENT</a>
                         </li>
                         <li>
-                            <a className={"lessImportantText"}> Lien exemple</a>
+                          <a href={"https://ecursus.univ-antilles.fr/"} className={"lessImportantText"}> eCursus</a>
                         </li>
                         <li>
-                            <a className={"lessImportantText"}> Lien exemple</a>
+                          <a href={'https://bu.univ-antilles.fr/'} className={"lessImportantText"}> Bibliothèque</a>
                         </li>
 
                     </ul>
                 </div>
-                <div>
-                    <h4 className={"goldenText"}> Nos partenaires </h4>
-                    <ul className={"lessImportantText"}>
-                        <li>
-                            <a> Lien exemple</a>
-                        </li>
-                        <li>
-                            <a className={"lessImportantText"}> Lien exemple</a>
-                        </li>
-                        <li>
-                            <a className={"lessImportantText"}> Lien exemple</a>
-                        </li>
 
-                    </ul>
-                </div>
             </footer>
         </>);
 

@@ -5,7 +5,8 @@ import Shoelcher from '../IMG/schoelcher.jpg'
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import _ from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
+import isEqual from 'lodash/isEqual'
 
 function Map() {
     const initialPosShoelcher = [{
@@ -117,7 +118,7 @@ function Map() {
     }
 
     function getPositionWithRightRatio() {
-        let duplicate = _.cloneDeep(informaticiens.current);
+      let duplicate = cloneDeep(informaticiens.current);
         duplicate = duplicate.map(objet => {
             objet.coords[0] = objet.coords[0] * ratio;
             objet.coords[1] = objet.coords[1] * ratio;
@@ -182,11 +183,11 @@ function Map() {
         if (campusSelectionne.target.value.localeCompare("fouillole") === 0) {
             image = Guadeloupe;
             setInitialWidth(WIDTH_CARTE_FOUILLOLE)
-            positionDeBase = _.cloneDeep(initialPosFouillole)
+          positionDeBase = cloneDeep(initialPosFouillole)
         } else {
             image = Shoelcher;
             setInitialWidth(WIDTH_CARTE_SHOELCHER);
-            positionDeBase = _.cloneDeep(initialPosShoelcher)
+          positionDeBase = cloneDeep(initialPosShoelcher)
         }
         setCarte(image)
         setInitialPos(positionDeBase)
@@ -197,11 +198,11 @@ function Map() {
         let newInformaticiens
         var choosenOne = positionDuPlusProche
         //      if (choosenOne[0] !==9999) {
-        newInformaticiens = _.cloneDeep(initialPos)
+      newInformaticiens = cloneDeep(initialPos)
         newInformaticiens = newInformaticiens.map(individu => {
             let scaledCoords = [individu.coords[0] * ratio, individu.coords[1] * ratio, individu.coords[2]]
             //     console.log("UseEffect : In here, for" + individu._id + " scaledCoords=" + scaledCoords + " and choosenOne=" + choosenOne + " , so comparing them give us " + _.isEqual(scaledCoords, choosenOne))
-            if (_.isEqual(scaledCoords, choosenOne)) {
+          if (isEqual(scaledCoords, choosenOne)) {
                 individu.active = true
                 individu.preFillColor = individu.fillColor
 
@@ -243,7 +244,7 @@ function Map() {
 
     return (
         <div className={"contact_Map"}>
-            <h5>Besoin d'aide ? Trouver l'informaticien le plus proche ! </h5>
+          <h5>Besoin d'aide ? Trouver le technicien le plus proche ! </h5>
             <InputLabel id="labelCampus">Campus</InputLabel>
             <Select labelId="labelCampus" value={carte} onChange={changeCampus}>
                 <MenuItem value={"fouillole"}>Campus de Fouillole</MenuItem>

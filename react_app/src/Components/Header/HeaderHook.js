@@ -20,7 +20,6 @@ function HeaderHook() {
                     offset.classList.add("offsetSticky")
                   menu.classList.add("stickyText")
                   header.classList.remove("headerGridNonSticky");
-
                   hasScrolled.current = true;
                 } else {
                     offset.classList.remove("offsetSticky")
@@ -35,7 +34,7 @@ function HeaderHook() {
             };
         }
     }, [width, hasScrolled]);
-  if (width >= 768 && !hasScrolled.current) {
+  if (width >= 768) {
         return (
             <>
                 <BigHeader/>

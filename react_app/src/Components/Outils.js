@@ -18,7 +18,7 @@ const Outil = (props) => {
   } else {
     linkParameters = {
       className: "outil whiteText",
-      to: '/outil?id=' + props.id + '&type=' + props.type,
+      to: '/outil?id=' + props.id + '&type=' + props.type + '&origin=' + props.origin,
     }
 
   }

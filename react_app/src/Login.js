@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import {BrowserRouter as Router, useLocation} from "react-router-dom";
-import _ from 'lodash'
+import {isEqual} from 'lodash/isEqual'
 
 export default function Login() {
     var [xmlResponse, setXMLResponse] = useState(null)
@@ -57,7 +57,7 @@ export default function Login() {
     function startSession(ticket) {
         let sessionCookie = getCookie('JSESSION')
         let sessionCookieArgument = "";
-        if (!_.isEqual(sessionCookie, "")) {
+      if (!isEqual(sessionCookie, "")) {
             sessionCookieArgument = '&session=' + sessionCookie
         }
       fetch('http://localhost:8900/api/hello?ticket=' + ticket + sessionCookieArgument

@@ -1,10 +1,10 @@
 import React from 'react'
-import photo from './IMG/photo1.jpg'
 
 const PhotoText = () => {
     return (
         <div className={"photoText"}>
-            <div className={"accueilPhoto"}><img id={"photoAccueil"} src={photo}/></div>
+          <div className={"accueilPhoto"}><img id={"photoAccueil"}
+                                               src={"api/sites/default/files/dev/photo_placeholder_0.jpg"}/></div>
             <div className={"accueilText"}>
                 <h2 className={"titreSection"}> Le mot du directeur</h2>
                 <p> Ut id ligula non mi vehicula condimentum sit amet nec metus. Nulla non est aliquam, dapibus justo

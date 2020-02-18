@@ -10,12 +10,12 @@ function Annuaire(props) {
     var [selection, setSelection] = useState("");
     var [open, setOpen] = useState(false);
     useEffect(() => {
-        console.log("test")
+      console.log("test");
         if (open) {
-            console.log("test")
+          console.log("test");
             console.log({open} + " " + {selection})
         }
-    })
+    });
     return (
         <>
             <div id={"annuaire"}>
@@ -36,14 +36,14 @@ function Annuaire(props) {
     );
 
     function changePole(value) {
-        console.log("On rentre ici ?")
+      console.log("On rentre ici ?");
 
         if (value == null) {
             console.log("Welp")
         } else {
-            console.log("On a effectivement changer le pole :" + value)
-            setSelection(previousPole => value);
-            setOpen(open => true)
+          console.log("On a effectivement changer le pole :" + value);
+          setSelection(value);
+          setOpen(true)
         }
     }
 }

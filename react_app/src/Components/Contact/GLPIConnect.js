@@ -24,7 +24,7 @@ function GLPIConnect(props) {
   }
   if (!loading.current) {
     return (
-      <div>
+      <div className={'glpiLogin'}>
         <Paper>
           {response ? console.log(response) : ""}
           <p>Pour déposer un ticket, veuillez vous connecter</p>

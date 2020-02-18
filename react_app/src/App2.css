@@ -31,6 +31,7 @@ body {
   width: 100%;
   background-color: #F2F4FF;
   overflow-y: scroll;
+  box-sizing: border-box;
 
 }
 
@@ -168,6 +169,7 @@ ul {
 }
 
 .hide {
+  visibility: hidden;
 }
 
 .optionIcone {
@@ -254,6 +256,10 @@ header {
   padding: 0;
 }
 
+.headerGridNonSticky {
+
+}
+
 .headerSearchSubmit {
   display: none;
 }
@@ -272,14 +278,14 @@ header {
 
 header hr {
   height: 6px;
-  width: 120%;
+  width: 99.7%;
   background-color: var(--secondary-color);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  margin: 0
+  margin: 0;
 }
 
 input[type="text"] {
@@ -450,7 +456,8 @@ input[type="text"] {
 #annuaireBackground {
   padding: 0 4vw 2vw;
   display: grid;
-  grid-template-rows: repeat(2, minmax(5vh, 15vh));
+  grid-template-rows: repeat(2, minmax(5%, 100%));
+  grid-row-gap: 2em;
 }
 
 .arrowIcon {
@@ -470,18 +477,31 @@ input[type="text"] {
   transition: all 0.2s ease-in 0s;
 }
 
-.boutonActionPrincipal {
+.bouton {
   width: fit-content;
   padding: 1em;
-  background-color: var(--secondary-color);
-  color: white;
   height: fit-content;
-  padding: 1em;
-  border: none;
   transition: .4s;
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2)
 }
 
+.bouton:hover {
+  cursor: pointer;
+}
+.boutonActionPrincipal {
+
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1em;
+  border: none;
+}
+
+.boutonActionSecondaire {
+  color: var(--secondary-color);
+  background-color: var(--background-color);
+  padding: 1em;
+  border: solid 1px var(--secondary-color);
+}
 .carte h4 {
   font-weight: 400;
   font-size: 124%;
@@ -506,7 +526,7 @@ input[type="text"] {
   display: inline-block;
   position: relative;
   text-decoration: none;
-  color: #fff;
+  /* color: #fff;*/
   text-transform: capitalize;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
@@ -572,6 +592,10 @@ footer h4, footer h6 {
   text-align: center;
 }
 
+footer a:hover {
+  color: var(--fourth-color)
+}
+
 .footerLogo {
   width: 100%;
   min-width: 10rem;
@@ -581,6 +605,10 @@ footer h4, footer h6 {
   text-align: center;
 }
 
+.glpiLogin {
+  width: 50%
+
+}
 input:focus,
 textarea:focus {
   outline: 0;
@@ -769,6 +797,7 @@ textarea:focus {
     grid-template-columns: repeat(3, minmax(8rem, 1fr));
     font-size: 10px;
   }
+
   .menu {
     font-size: 1.14em;
   }
@@ -795,7 +824,14 @@ textarea:focus {
 }
 
 @media (min-width: 992px) {
+  div .thumbnail {
+    height: 30vw;
+    width: 30vw;
+  }
 
+  .photoText {
+    grid-template-columns: repeat(auto-fit, minmax(3em, 50%));
+  }
 }
 
 @media (min-width: 1100px) {
@@ -803,5 +839,45 @@ textarea:focus {
 }
 
 @media (min-width: 1200px) {
+  #contact {
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
+    justify-items: center;
+    align-items: center;
 
+  }
+
+  #grid2 {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .headerGridNonSticky {
+    grid-template-columns: minmax(10em, 100%) 1fr 1fr;
+    grid-template-areas: "logo . searchBar" "menu menu .";
+  }
+
+  .logo {
+    width: 70%;
+  }
+
+  .optionIcone {
+    font-size: 15vw;
+  }
+
+  .searchPageSearchBar {
+    width: 75%;
+  }
+
+  div .searchPageSearchBarInput {
+    width: 80em;
+  }
+
+  .sticky {
+    height: 18%;
+  }
+
+  .twoOptions {
+    grid-template-columns: auto auto;
+  }
 }

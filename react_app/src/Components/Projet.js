@@ -1,8 +1,9 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Carte from "./Cartes/Carte";
 import Bouton from "./Bouton";
 import useGetParameters from "../Util/urlhandling";
 import {CircularProgress} from "@material-ui/core";
+import {getCookie} from '../Util/apiHandling'
 
 /**TODO:Modifier la structure du composant Session afin qu'il vérifie
  *
@@ -19,15 +20,24 @@ function Projet() {
   var isContentRequested = useRef(false)
 
   function handleClick(e) {
-
+    setError('');
+    setIsLoading(true);
+    setSession('');
     window.location.href = "https://auth.martinique.univ-ag.fr/cas/login?service=http://localhost:8900/projets"
     //  fetch("http://localhost:8900/api/?session=")
-
   }
 
-  let parameters = useGetParameters('ticket');
+  let parameters = ''
+  parameters = useGetParameters('ticket');
   if (session) {
     askForPermission(session);
+  } else {
+    let sessionCookie = ('')
+    sessionCookie = getCookie('id_session');
+    if (sessionCookie && !parameters['ticket']) {
+      setSession(sessionCookie);
+      setIsLoading(true);
+    }
 
   }
   if (typeof parameters.ticket !== "undefined") {
@@ -37,7 +47,10 @@ function Projet() {
       startSession(ticket);
     }
   }
+  useEffect(() => {
 
+
+  }, [session])
   if (data) {
     return (
       <div className={"projets grid"}>
@@ -54,10 +67,7 @@ function Projet() {
   } else {
     return (
       <div>
-        <p>
-          Vous n'êtes pas autorisé à visualiser cette page
-        </p>
-        {error ? <p style={{color: "red"}}>{error}</p> : ""}
+        {error ? <p style={{color: "red"}}>{error}</p> : <p> Vous n'êtes pas autorisé à visualiser cette page</p>}
         <Bouton type={"main"} contenu={"Obtenir la permission"} onClick={handleClick}/>
       </div>
     );
@@ -67,7 +77,9 @@ function Projet() {
     if (!isContentRequested.current) {
       isContentRequested.current = true
       fetch('/api/projets?session=' + session
-      ).then(result => result.json()
+      ).then(result => {
+          return result.json()
+        }
       ).then(result => {
         console.log(result);
         if (typeof result.data !== "undefined" && result.data) {
@@ -75,11 +87,12 @@ function Projet() {
           return result.data
         } else if (typeof result.message !== "undefined" && result.message) {
           setError(result.message);
+          setSession('');
           return result.message
         } else {
           setError("Check API Call")
         }
-      })
+      }).catch(error => console.warn(error))
     }
 
   }
@@ -92,7 +105,8 @@ function Projet() {
       ).then(resultat => {
           console.log(resultat);
           if (typeof resultat.id_session !== "undefined") {
-            setSession(resultat.id_session)
+            setSession(resultat.id_session);
+            document.cookie = "id_session=" + resultat.id_session;
             return (resultat.id_session)
           } else if (typeof resultat.message !== "undefined") {
             setError(resultat.message)

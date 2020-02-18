@@ -34,7 +34,7 @@ function SearchBar(props) {
     }, [open]);
     return (
         <div className={"searchbar_container"}>
-          <input id={'searchInput'} className={"hide"} type={"text"} placeholder={"Rechercher..."}
+          <input id={'searchInput'} type={"text"} placeholder={"Rechercher..."}
                  onChange={handleChange}/>
             <label className={'headerSearchSubmitWrapper'}>
               <input type={"submit"} className={'headerSearchSubmit'}/>

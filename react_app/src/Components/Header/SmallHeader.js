@@ -33,7 +33,6 @@ const SmallHeader = () => {
   function openModal() {
     setHasClicked(hasClicked => !hasClicked)
   }
-
   let menu;
   menu = (toggle) => {
     return (

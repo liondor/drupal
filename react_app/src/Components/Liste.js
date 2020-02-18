@@ -171,6 +171,7 @@ function Liste(props) {
           type: item.type
         }
         if (props.type === 'categorie_outils' || props.type === 'outils') {
+          propriete.origin = searchParam.id
           return (<Outil {...propriete}>Test</Outil>)
         }
         if (props.type === 'conseils' || props.type === 'articles') {

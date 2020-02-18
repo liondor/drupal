@@ -3,6 +3,8 @@ import useGetParameters from "../Util/urlhandling"
 import {extractData, getItem} from "../Util/apiHandling"
 import parse from 'html-react-parser'
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Bouton from "./Bouton";
+import {Link} from "react-router-dom";
 
 /** Ce composant React prendra en entrée un type de contenu et l'id du contenu souhaité.
  * En sortie, ce composant affichera le titre et le corps du contenu désiré
@@ -26,6 +28,7 @@ const Presentation = (props) => {
   var [contenu, setContenu] = useState("")
   var [image, setImage] = useState("")
   var [results, setResults] = useState(null)
+  var origin = useRef("");
 
   var div = document.createElement('div')
   if (contenu !== "") {
@@ -36,6 +39,7 @@ const Presentation = (props) => {
   }
   return (
     <div className={"outilPresentation"}>
+      {generateButton()}
       <h1 className={"outilPresentationTitre"}> {titre}</h1>
 
       <Test/>
@@ -63,10 +67,27 @@ const Presentation = (props) => {
     searchIMGDone.current = true;
   }
 
+  function generateButton() {
+    let page = "";
+    let contenu = ""
+    if (type) {
+      if (!type.substring(6).localeCompare("article")) {
+        page = 'news';
+        contenu = "Retour vers la liste des articles"
+      } else if (!type.substring(6).localeCompare('outils')) {
+        page = 'categorie?id=' + origin.current + '&type=categorie';
+        contenu = "Retour vers la liste des outils numériques"
 
+      }
+      return (<Link to={page}><Bouton type={'main'} contenu={contenu}/> </Link>);
+    }
+  }
   function Test() {
-    var testID = useGetParameters('type', 'id')["id"]
-    var testType = useGetParameters('type', 'id')["type"]
+    const parameters = useGetParameters('type', 'id', 'origin')
+    var testID = parameters["id"]
+    var testType = parameters["type"]
+    var ori = parameters["origin"]
+    origin.current = ori;
     if (!searchDone.current) {
       searchDone.current = true
       getItem(testType, testID, setResults, preventSeveralCalls)

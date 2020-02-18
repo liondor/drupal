@@ -8,7 +8,7 @@ const Contact = () => {
 
 
   return (
-    <div style={{width: '85%'}}>
+    <div>
           <div id={"contact"} className={"grid"}>
             <Formulaire/>
                 <Annuaire/>

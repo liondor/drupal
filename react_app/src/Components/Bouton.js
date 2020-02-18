@@ -10,6 +10,8 @@ const Bouton = (props) => {
   }
   if (props.type === "main") {
     classeBouton += " boutonActionPrincipal "
+  } else if (!props.type.localeCompare("secondary")) {
+    classeBouton += " boutonActionSecondaire "
   }
   if (props.onClick) {
     click = props.onClick
@@ -23,7 +25,7 @@ const Bouton = (props) => {
   }
 
   return (
-    <button style={theme} className={classeBouton + "inBetween"} id={props.id} onClick={click}>
+    <button style={theme} className={classeBouton + "inBetween bouton"} id={props.id} onClick={click}>
       {props.contenu}
       <div className={"arrowIcon"}><FaArrowRight/></div>
     </button>);

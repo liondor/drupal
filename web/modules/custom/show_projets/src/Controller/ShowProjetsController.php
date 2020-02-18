@@ -32,9 +32,9 @@ class ShowProjetsController extends ControllerBase
 
       return new Response($projets);
     }
-    $error['message'] = "Session invalide";
+    $error['message'] = "Votre session est invalide ou a expiré.";
 
-    return new Response($error);
+    return new Response(json_encode($error));
 
   }
 

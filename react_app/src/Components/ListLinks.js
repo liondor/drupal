@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import parse from 'html-react-parser'
 
 const ListLinks = (props) => {
   function ConditionnalRendering() {
@@ -15,7 +14,7 @@ const ListLinks = (props) => {
         <Link to={'outil?id=' + props.id + "&type=" + props.type}>
           <div className={"searchResult"}>
             <h3>{props.titre}</h3>
-            <p>{props.date.substring(0, 10)} </p>{props.content ? parse(props.content) : ''}
+            <span>{props.date.substring(0, 10)} </span>
           </div>
         </Link>
       )

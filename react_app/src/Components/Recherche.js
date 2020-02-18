@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useLocation} from "react-router-dom";
 import ListLinks from "./ListLinks";
 import SearchBar from "./Header/SearchBar";
@@ -76,6 +76,7 @@ const Recherche = () => {
                                                        content={node.content} date={node.date}
                                                        type={node.type.substring(6)}/>)
     }
+
     return (
       <>
         <hr/>
@@ -84,6 +85,22 @@ const Recherche = () => {
     );
   }
 
+  useEffect
+  (() => {
+      let header = document.querySelector("header .searchbar_container")
+      header.classList.add('hide')
+      let goodSearchBar = document.querySelectorAll(".App .searchbar_container")[2]
+      let input = document.querySelectorAll(".App .searchbar_container input ")[2]
+      goodSearchBar.classList.add('searchPageSearchBar')
+      input.classList.add('searchPageSearchBarInput')
+
+      return () => {
+        header.classList.remove("hide")
+      }
+    }
+
+    , []
+  )
   return (
     <>
       <SearchBar reset={searchAgain}/>
