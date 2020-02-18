@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from "react-dom";
 import Drawer from "@material-ui/core/Drawer"
 
 const SideMenu = (props) => {
@@ -31,6 +30,6 @@ const SideMenu = (props) => {
         {props.content(props.toggle)}
       </>
     </Drawer>)
-}
+};
 
 export default SideMenu;

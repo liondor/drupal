@@ -32,5 +32,5 @@ const ListLinks = (props) => {
     </>
   )
 
-}
+};
 export default ListLinks

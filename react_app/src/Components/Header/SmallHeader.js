@@ -28,7 +28,7 @@ menu = (toggle) => {
 };*/
 
 const SmallHeader = () => {
-    const [hasClicked, setHasClicked] = useState(false)
+  const [hasClicked, setHasClicked] = useState(false);
 
   function openModal() {
     setHasClicked(hasClicked => !hasClicked)
@@ -64,7 +64,8 @@ const SmallHeader = () => {
 
                 <div className={"logo_container"}>
                     <Link to="/">
-                      <img className={"logo"} src={"api/sites/default/files/default_images/Logo.png"}/>
+                      <img alt={"Logo de la DSIN"} className={"logo"}
+                           src={"api/sites/default/files/default_images/Logo.png"}/>
                     </Link>
                 </div>
             </div>
@@ -73,5 +74,5 @@ const SmallHeader = () => {
     );
 
 
-}
+};
 export default SmallHeader;

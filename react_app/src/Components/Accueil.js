@@ -34,5 +34,5 @@ const Accueil = (props) => {
             <PhotoText/>
         </div>
     );
-}
+};
 export default Accueil;

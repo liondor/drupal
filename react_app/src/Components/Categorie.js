@@ -11,24 +11,19 @@ import CircularProgress from "@material-ui/core/CircularProgress";
  *
  * */
 const Categorie = (props) => {
-  var searchDone = useRef(false)
-  var searchIMGDone = useRef(false)
+  var searchDone = useRef(false);
+  var searchIMGDone = useRef(false);
   /* Les deux variables ci-dessus permettent d'éviter d'effectuer des appels vers l'API à chaque rendu de page.*/
 
-  var [titre, setTitre] = useState("")
-  var [id, setId] = useState("")
-  var [type, setType] = useState("")
-  var [contenu, setContenu] = useState("")
-  var [image, setImage] = useState("")
-  var [results, setResults] = useState(null)
+  var [titre, setTitre] = useState("");
+  var [id, setId] = useState("");
+  var [type, setType] = useState("");
+  var [contenu, setContenu] = useState("");
+  var [image, setImage] = useState("");
+  var [results, setResults] = useState(null);
 
-  var div = document.createElement('div')
-  if (contenu !== "") {
-    div = parse(contenu)
-    // console.log(contenu)
-    //console.log(div)
+  var div = document.createElement('div');
 
-  }
   return (
     <div className={"outilPresentation"}>
       <h1 className={"outilPresentationTitre"}> {titre}</h1>
@@ -40,16 +35,6 @@ const Categorie = (props) => {
 
     </div>);
 
-  function searchContent(type, id) {
-    if (!searchDone.current) {
-      let url = "http://localhost:8900/api/jsonapi/node/" + type + "/" + id;
-      fetch(url,
-        {headers: {'Accept': 'application/vnd.api+json'},}
-      ).then()
-    }
-
-  }
-
   function preventSeveralCalls() {
     searchDone.current = true;
   }
@@ -60,34 +45,30 @@ const Categorie = (props) => {
 
 
   function Test() {
-    var testID = useGetParameters('type', 'id')["id"]
-    var testType = useGetParameters('type', 'id')["type"]
+    var testID = useGetParameters('type', 'id')["id"];
+    var testType = useGetParameters('type', 'id')["type"];
     if (!searchDone.current) {
-      searchDone.current = true
+      searchDone.current = true;
       getItem(testType, testID, setResults, preventSeveralCalls)
     }
     if (results !== null && !searchIMGDone.current) {
       //  console.log(results)
-      var data = extractData(results, preventSeveralCallsIMG, setImage, 'id', 'titre', 'type', 'contenu', 'image')
+      var data = extractData(results, preventSeveralCallsIMG, setImage, 'id', 'titre', 'type', 'contenu', 'image');
       if (typeof data !== "undefined") {
-        setId(data['id'])
-        setTitre(data['titre'])
-        setType(data['type'])
+        setId(data['id']);
+        setTitre(data['titre']);
+        setType(data['type']);
         setContenu(data['contenu'])
       }
       //    console.log(image)
     }
     return (
       <>
-        <h1 className={"outilPresentationTitre"}></h1>
-
-        {
-
-        }
+        <h1 className={"outilPresentationTitre"}/>
       </>
     );
   }
 
-}
+};
 
 export default Categorie;

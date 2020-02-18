@@ -3,8 +3,8 @@ import {FaArrowRight} from 'react-icons/fa'
 
 
 const Bouton = (props) => {
-  var classeBouton = "";
-  var click = null
+  let classeBouton = "";
+  let click = null;
   if (props.arrow) {
     classeBouton += " effect effect-1 "
   }
@@ -16,10 +16,10 @@ const Bouton = (props) => {
   if (props.onClick) {
     click = props.onClick
   }
-  var theme = {
+  let theme = {
     marginTop: props.marge,
     marginBottom: props.marge
-  }
+  };
   if (props.modal) {
     theme.backgroundColor = "#0B1D51"
   }
@@ -31,5 +31,5 @@ const Bouton = (props) => {
     </button>);
 
 
-}
+};
 export default Bouton

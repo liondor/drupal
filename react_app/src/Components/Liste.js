@@ -5,10 +5,10 @@ import Carte from "./Cartes/Carte";
 import useGetParameters from "../Util/urlhandling";
 
 function Liste(props) {
-  var [categories, setCatergories] = useState(null)
-  var [formattedCategories, setFormattedCategories] = useState(null)
+  var [categories, setCatergories] = useState(null);
+  var [formattedCategories, setFormattedCategories] = useState(null);
   var pager = 'page[limit]=' + props.limit;
-  var content_type = ''
+  var content_type = '';
   const content = "node";
   const taxonomyTerm = "taxonomy_term";
   var contentOrTag = "";
@@ -16,8 +16,8 @@ function Liste(props) {
 
 
   //||Paramaétrage du filtre
-  const searchParam = useGetParameters('id', 'type')
-  console.log(searchParam.id)
+  const searchParam = useGetParameters('id', 'type');
+  console.log(searchParam.id);
   var filter = "";
   if (!props.type.localeCompare("outils")) {
     filter = "filter[field_categorie.id]=" + searchParam.id
@@ -70,10 +70,10 @@ function Liste(props) {
       include = "include=field_image"
     }
 
-    var sort = ""
+    var sort = "";
     if (typeof props.sort !== 'undefined') {
       if (!props.sort.localeCompare('top')) {
-        console.log('Comparaison marche !')
+        console.log('Comparaison marche !');
         sort = '&sort=-field_viewcount'
       }
     }
@@ -116,17 +116,17 @@ function Liste(props) {
     }
     //   console.log(images);
     let pairedArray = content.map(categorie => {
-      let id
-      let type
-      let imageID
-      let titre
-      let content
-      let result
-      let imageURL
-      console.log(categorie)
+      let id;
+      let type;
+      let imageID;
+      let titre;
+      let content;
+      let result;
+      let imageURL;
+      console.log(categorie);
       if (typeof categorie.relationships !== "undefined") {
         if (categorie.relationships.field_image.data !== null) {
-        imageID = categorie.relationships.field_image.data.id
+          imageID = categorie.relationships.field_image.data.id;
         images.forEach(image => {
           if (image.id === imageID)
             imageURL = image.url
@@ -135,13 +135,13 @@ function Liste(props) {
       } else {
         imageURL = "/api/sites/default/files/default_images/question-mark.png"
       }
-      id = categorie.id
+      id = categorie.id;
       if (!categorie.type.localeCompare("taxonomy_term--categorie")) {
-        titre = categorie.attributes.name
+        titre = categorie.attributes.name;
         type = "categorie"
       } else {
 
-        titre = categorie.attributes.title
+        titre = categorie.attributes.title;
         type = categorie.type.substring(6)
 
       }
@@ -149,18 +149,18 @@ function Liste(props) {
       if (categorie.attributes.field_description) {
         content = categorie.attributes.field_description.value
       } else if (categorie.attributes.description) {
-        console.log("Pour " + titre + ' contenu= ' + categorie.attributes.description.value)
+        console.log("Pour " + titre + ' contenu= ' + categorie.attributes.description.value);
         content = categorie.attributes.description.value
       }
-      result = {id: id, titre: titre, description: content, urlImage: imageURL, type: type}
+      result = {id: id, titre: titre, description: content, urlImage: imageURL, type: type};
       return result;
-    })
+    });
     return pairedArray
   }
 
   function renderChild() {
-    let result = formattedCategories
-    if (result !== null & content_type !== undefined) {
+    let result = formattedCategories;
+    if (result !== null && content_type !== undefined) {
       return result.map(item => {
         let propriete = {
           key: item.id,
@@ -169,9 +169,9 @@ function Liste(props) {
           description: item.description,
           urlImage: item.urlImage,
           type: item.type
-        }
+        };
         if (props.type === 'categorie_outils' || props.type === 'outils') {
-          propriete.origin = searchParam.id
+          propriete.origin = searchParam.id;
           return (<Outil {...propriete}>Test</Outil>)
         }
         if (props.type === 'conseils' || props.type === 'articles') {
