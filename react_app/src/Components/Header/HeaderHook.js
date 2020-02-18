@@ -17,15 +17,15 @@ function HeaderHook() {
             const scrollCallBack = window.addEventListener("scroll", () => {
                 if (window.pageYOffset > sticky) {
                     header.classList.add("sticky");
-                    offset.classList.add("offsetSticky")
-                  menu.classList.add("stickyText")
+                  offset.classList.add("offsetSticky");
+                  menu.classList.add("stickyText");
                   header.classList.remove("headerGridNonSticky");
                   hasScrolled.current = true;
                 } else {
-                    offset.classList.remove("offsetSticky")
+                  offset.classList.remove("offsetSticky");
                     header.classList.remove("sticky");
-                  menu.classList.remove("stickyText")
-                  header.classList.add('headerGridNonSticky')
+                  menu.classList.remove("stickyText");
+                  header.classList.add('headerGridNonSticky');
                   hasScrolled.current = false;
                 }
             });

@@ -4,22 +4,16 @@ import Bouton from "../Bouton";
 import {Link} from "react-router-dom";
 
 function SearchBar(props) {
-    var [open, setOpen] = useState(false)
-  var [query, setQuery] = useState("")
+  var [open, setOpen] = useState(false);
+  var [query, setQuery] = useState("");
     var ignoreFirstRender = useRef();
     ignoreFirstRender = true;
     var hideClass = "";
   var reset = props.reset;
-    if (props.size === "small") {
-        hideClass = "hide"
-    }
-  const toggleDrawer = (props) => {
-        setOpen(!open)
-        ignoreFirstRender = false;
-    }
+
 
   function handlePress(e) {
-    console.log("test")
+    console.log("test");
 
     return null
   }

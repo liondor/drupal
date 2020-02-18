@@ -9,8 +9,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
  *
  * */
 const Recherche = () => {
-  var [results, setResults] = useState(null)
-  var searchDone = useRef(false)
+  var [results, setResults] = useState(null);
+  var searchDone = useRef(false);
 
   function searchContent(textRequested) {
     if (!searchDone.current) {
@@ -29,7 +29,7 @@ const Recherche = () => {
               titre: node.attributes.title,
               id: node.id,
               date: node.attributes.created,
-            }
+            };
             if (node.attributes.body) {
               if (node.attributes.body.value) {
                 data.content = node.attributes.body.value;
@@ -40,12 +40,12 @@ const Recherche = () => {
 
             return (data)
             }
-          )
+          );
 
           return temp
         }
       ).then(res => {
-        setResults(res)
+        setResults(res);
         searchDone.current = true
       })
     }
@@ -68,7 +68,7 @@ const Recherche = () => {
     let query = useQuery();
     let text = "";
     text = query.get("q");
-    searchContent(text)
+    searchContent(text);
     let researchResults;
     if (results !== null) {
 
@@ -87,27 +87,34 @@ const Recherche = () => {
 
   useEffect
   (() => {
-      let header = document.querySelector("header .searchbar_container")
-      header.classList.add('hide')
-      let goodSearchBar = document.querySelectorAll(".App .searchbar_container")[2]
-      let input = document.querySelectorAll(".App .searchbar_container input ")[2]
-      goodSearchBar.classList.add('searchPageSearchBar')
-      input.classList.add('searchPageSearchBarInput')
+      let header = document.querySelector("header .searchbar_container");
+      if (header) {
+        header.classList.add('hide')
+      }
+      let goodSearchBar = document.querySelector("#searchPageSearchBar .searchbar_container");
+      console.log(goodSearchBar);
+      let input = document.querySelector("#searchPageSearchBar .searchbar_container");
+      goodSearchBar.classList.add('searchPageSearchBar');
+      input.classList.add('searchPageSearchBarInput');
 
       return () => {
-        header.classList.remove("hide")
+        if (header) {
+          header.classList.remove("hide")
+        }
       }
     }
 
     , []
-  )
+  );
   return (
     <>
-      <SearchBar reset={searchAgain}/>
+      <div id={'searchPageSearchBar'}>
+        <SearchBar reset={searchAgain}/>
+      </div>
       <DisplayQuery/>
     </>
 
   );
 
-}
+};
 export default Recherche;

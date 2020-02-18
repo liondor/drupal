@@ -869,7 +869,7 @@ textarea:focus {
     width: 75%;
   }
 
-  div .searchPageSearchBarInput {
+  #searchPageSearchBar .searchPageSearchBarInput input {
     width: 80em;
   }
 
