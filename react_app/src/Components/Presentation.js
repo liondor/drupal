@@ -39,13 +39,13 @@ const Presentation = (props) => {
   }
   return (
     <div className={"outilPresentation"}>
-      {generateButton()}
       <h1 className={"outilPresentationTitre"}> {titre}</h1>
 
       <Test/>
       {image ? <img src={image}/> : ""}
       {contenu !== "" ? parse(contenu) : (
         <div style={{display: "grid", justifyItems: "center"}}><CircularProgress/></div>)}
+      {generateButton()}
 
     </div>);
 
@@ -70,18 +70,27 @@ const Presentation = (props) => {
   function generateButton() {
     let page = "";
     let contenu = ""
+    let shouldReturn = false;
     if (type) {
-      if (!type.substring(6).localeCompare("article")) {
-        page = 'news';
-        contenu = "Retour vers la liste des articles"
-      } else if (!type.substring(6).localeCompare('outils')) {
-        page = 'categorie?id=' + origin.current + '&type=categorie';
-        contenu = "Retour vers la liste des outils numériques"
-
+      let typeOfContent = type.substring(6);
+      switch (typeOfContent) {
+        case("article"):
+          page = 'news';
+          contenu = "Retour vers la liste des articles"
+          shouldReturn = true;
+          break;
+        case ("outils"):
+          page = 'categorie?id=' + origin.current + '&type=categorie';
+          contenu = "Retour vers la liste des outils numériques";
+          shouldReturn = true;
+          break;
       }
-      return (<Link to={page}><Bouton type={'main'} contenu={contenu}/> </Link>);
+      if (shouldReturn) {
+        return (<Link to={page}><Bouton type={'main'} contenu={contenu}/> </Link>);
+      }
     }
   }
+
   function Test() {
     const parameters = useGetParameters('type', 'id', 'origin')
     var testID = parameters["id"]

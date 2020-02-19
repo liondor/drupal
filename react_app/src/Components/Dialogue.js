@@ -21,6 +21,10 @@ function Dialogue(props) {
         props.handleClose();
 
     };
+  var contenu = ""
+  if (props.contenu) {
+    contenu = props.contenu;
+  }
     return (
         <div>
             <Dialog
@@ -33,7 +37,7 @@ function Dialogue(props) {
               <DialogTitle id="alert-dialog-title">{props.titre}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                      {parse(props.contenu)}
+                      {typeof contenu === 'object' ? contenu : parse(contenu)}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

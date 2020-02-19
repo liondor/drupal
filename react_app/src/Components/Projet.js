@@ -11,20 +11,20 @@ import Dialogue from "./Dialogue";
  * */
 function Projet(props) {
 
-  var [autorisation, setAutorisation] = useState(false)
-  var [session, setSession] = useState("")
-  var [selectedCard, setSelectedCard] = useState("")
-  var [modalContent, setModalContent] = useState("")
-  var [modalTitle, setModalTitle] = useState("")
+  var [autorisation, setAutorisation] = useState(false);
+  var [session, setSession] = useState("");
+  var [selectedCard, setSelectedCard] = useState("");
+  var [modalContent, setModalContent] = useState("");
+  var [modalTitle, setModalTitle] = useState("");
   var [open, setOpen] = useState(false);
-  var [data, setData] = useState("")
-  var [error, setError] = useState("")
-  var [isLoading, setIsLoading] = useState(false)
-  var ticket = useRef("")
-  var isSessionRequested = useRef(false)
-  var isContentRequested = useRef(false)
+  var [data, setData] = useState("");
+  var [error, setError] = useState("");
+  var [isLoading, setIsLoading] = useState(false);
+  var ticket = useRef("");
+  var isSessionRequested = useRef(false);
+  var isContentRequested = useRef(false);
 
-  function handleClick(e) {
+  function handleClick() {
     setError('');
     setIsLoading(true);
     setSession('');
@@ -34,16 +34,16 @@ function Projet(props) {
 
   const handleClose = () => {
     setOpen(false);
-    setModalTitle("")
-    setModalContent('')
+    setModalTitle("");
+    setModalContent('');
     setSelectedCard('')
   };
-  let parameters = ''
+  let parameters = '';
   parameters = useGetParameters('ticket');
   if (session) {
     askForPermission(session);
   } else {
-    let sessionCookie = ('')
+    let sessionCookie = ('');
     sessionCookie = getCookie('id_session');
     if (sessionCookie && !parameters['ticket']) {
       setSession(sessionCookie);
@@ -54,14 +54,14 @@ function Projet(props) {
   if (typeof parameters.ticket !== "undefined") {
     if (parameters.ticket && !ticket.current) {
       ticket.current = parameters.ticket;
-      setIsLoading(true)
+      setIsLoading(true);
       startSession(ticket);
     }
   }
   useEffect(() => {
 
 
-  }, [session])
+  }, [session]);
   if (data) {
     if (selectedCard) {
       getAssociatedContent()
@@ -93,7 +93,7 @@ function Projet(props) {
 
   function askForPermission(session) {
     if (!isContentRequested.current) {
-      isContentRequested.current = true
+      isContentRequested.current = true;
       fetch('/api/projets?session=' + session
       ).then(result => {
           return result.json()
@@ -115,7 +115,7 @@ function Projet(props) {
   }
 
   function generateProjects(listOfObjects) {
-    let properties = {}
+    let properties = {};
 
     if (data) {
       return data.map(node => {
@@ -141,7 +141,7 @@ function Projet(props) {
             document.cookie = "id_session=" + resultat.id_session;
             return (resultat.id_session)
           } else if (typeof resultat.message !== "undefined") {
-            setError(resultat.message)
+            setError(resultat.message);
             return (resultat.message)
           }
         }
@@ -154,10 +154,10 @@ function Projet(props) {
 
   function getAssociatedContent() {
     if (selectedCard && !modalContent) {
-      let projectData = data.filter(node => node.id === selectedCard)[0].attributes
-      console.log(projectData)
+      let projectData = data.filter(node => node.id === selectedCard)[0].attributes;
+      console.log(projectData);
       setModalContent(projectData.body.value);
-      setModalTitle(projectData.title)
+      setModalTitle(projectData.title);
       setOpen(true);
 
     }

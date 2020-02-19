@@ -296,7 +296,6 @@ input[type="text"] {
   border: none;
   padding: 1%;
   border-radius: 4px;
-  width: 100%;
 }
 
 .logo {
@@ -609,7 +608,12 @@ footer a:hover {
 }
 
 .glpiLogin {
-  width: 50%
+  width: 80%;
+  display: grid;
+}
+
+#glpiForm {
+  display: grid;
 
 }
 input:focus,

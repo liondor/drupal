@@ -16,7 +16,7 @@ const TwoOptions = () => {
                 </div>
             </Link>
 
-            <Link to="/missions">
+        <Link to="/outil?id=3440e5f7-f714-438a-b4dd-c01785216cf6&type=page">
                 <div>
 
                     <IconContext.Provider value={{className: "optionIcone"}}>

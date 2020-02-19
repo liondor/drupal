@@ -31,7 +31,7 @@ const PhotoText = () => {
             }
           </div>
             <div className={"accueilText"}>
-              <h2 className={"titreSection"}></h2>
+              <h2 className={"titreSection"}>Le mot du directeur</h2>
               <p>
                 {nodeDirecteur ? message : ""}
               </p>
