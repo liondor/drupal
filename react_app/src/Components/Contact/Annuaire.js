@@ -31,7 +31,7 @@ function Annuaire(props) {
                     </div>
                 </Paper>
             </div>
-            <Dialogue open={open} handleClose={handleClose} selection={selection}/>
+          <Dialogue open={open} handleClose={handleClose} titre={selection}/>
         </>
     );
 

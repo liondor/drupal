@@ -8,7 +8,7 @@ import parse from 'html-react-parser'
  *
  * */
 const Outil = (props) => {
-  var linkParameters = {}
+  var linkParameters = {};
 
   if (!props.type.localeCompare('categorie')) {
     linkParameters = {
@@ -47,6 +47,6 @@ const Outil = (props) => {
 
         </Link>
     );
-}
+};
 
 export default Outil

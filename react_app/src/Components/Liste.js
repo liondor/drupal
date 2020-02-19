@@ -47,8 +47,12 @@ function Liste(props) {
         if (props.type === "conseils") {
           content_type = "conseils"
         }
-        if (props.type === "outils")
+        if (props.type === "outils") {
           content_type = "outils"
+        }
+        if (props.type === "projets") {
+          content_type = "projet"
+        }
       }
     }
     // || Paramètre limitant le nombre de champs renvoyer par l'API (Améliore les performance, réduit besoin de traiter les données)
@@ -174,7 +178,7 @@ function Liste(props) {
           propriete.origin = searchParam.id;
           return (<Outil {...propriete}>Test</Outil>)
         }
-        if (props.type === 'conseils' || props.type === 'articles') {
+        if (props.type === 'conseils' || props.type === 'articles' || props.type === 'projets') {
           return (<Carte {...propriete} >Test</Carte>)
         } else {
           return (<p>Error when fetching content</p>)

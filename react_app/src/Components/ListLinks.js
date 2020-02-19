@@ -14,7 +14,7 @@ const ListLinks = (props) => {
         <Link to={'outil?id=' + props.id + "&type=" + props.type}>
           <div className={"searchResult"}>
             <h3>{props.titre}</h3>
-            <span>{props.date.substring(0, 10)} </span>
+            <span className={'unimportantText'}>{props.date.substring(0, 10)} </span>
           </div>
         </Link>
       )

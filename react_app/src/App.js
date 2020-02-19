@@ -67,7 +67,7 @@ class App extends Component {
                             </Route>
                             <Route path="/projets">
                                 <h1 className={"titreSection"}>Nos projets</h1>
-                                <Projet/>
+                              <Projet token={this.state.token}/>
                             </Route>
                           <Route path="/news">
                             <Liste token={this.state.token} type={"articles"}/>

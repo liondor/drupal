@@ -227,6 +227,9 @@ ul {
 
 }
 
+.unimportantText {
+  color: var(--unimportant-text-color-white-background);
+}
 
 /* || TOUT LE SITE */
 
