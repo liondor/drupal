@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react'
 import Bouton from "../Bouton";
 import GLPIConnect from "./GLPIConnect";
 import {createTicket} from "../../Util/apiHandling";
+import {Paper} from "@material-ui/core";
 
 function Formulaire() {
   var [loading, setLoading] = useState(false);
@@ -13,7 +14,9 @@ function Formulaire() {
   if (token) {
     getCategories();
     return (
-      <div>
+      <div style={{width: "100%"}}>
+        <Paper>
+          <h3>Description de la demande ou de l'incident</h3>
         <form id={"formulaire"} encType={"multipart/form-data"} onSubmit={handleSubmit}>
           <label htmlFor={"type"}>Type</label>
           <select name={"type"}>
@@ -38,6 +41,7 @@ function Formulaire() {
                     placeholder={"Décrivez votre problème...."}/>
           <Bouton id={"formButton"} contenu={"Valider"} type={"main"}> </Bouton>
         </form>
+        </Paper>
       </div>
     )
   } else {

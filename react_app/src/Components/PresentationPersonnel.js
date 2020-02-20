@@ -1,19 +1,20 @@
 import React from 'react'
 import {FaPhone} from 'react-icons/fa'
+import {MdMail} from 'react-icons/md'
 
-const PresentationPersonnel = () => {
+const PresentationPersonnel = (props) => {
     return (
         <div>
-            <h4> Position</h4>
-            <p>DUPONT John</p>
-          <div><span> 06 90 91 92 93</span> <FaPhone/></div>
-            <p> john.dupont@univ-antilles.fr
-            </p>
+          <h4> {props.position ? props.position : "Loading..."}</h4>
+          <p>{props.nom ? props.nom : ""} {props.prenom ? props.prenom : ""}</p>
+          {props.telephone ? (<div><FaPhone/> :<span> {props.telephone}</span></div>) : ""}
+          {props.email ? (<div><MdMail/> :<span>{props.email}</span></div>) : ""}
+
 
         </div>
-    )
+    );
 
 
-}
+};
 
 export default PresentationPersonnel

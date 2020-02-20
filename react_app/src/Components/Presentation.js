@@ -42,8 +42,8 @@ const Presentation = (props) => {
       <h1 className={"outilPresentationTitre"}> {titre}</h1>
 
       <Test/>
-      {image ? <img src={image}/> : ""}
-      {contenu !== "" ? parse(contenu) : (
+      {/*image ? <img src={image}/> : ""*/}
+      {contenu !== "" ? (<div>{parse(contenu)}</div>) : (
         <div style={{display: "grid", justifyItems: "center"}}><CircularProgress/></div>)}
       {generateButton()}
 
@@ -114,11 +114,6 @@ const Presentation = (props) => {
     }
     return (
       <>
-        <h1 className={"outilPresentationTitre"}></h1>
-
-        {
-
-        }
       </>
     );
   }

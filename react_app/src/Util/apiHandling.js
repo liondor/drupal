@@ -2,11 +2,12 @@ var BASE_URL = "http://localhost:8900/api/"
 const RESSOURCE_URL = BASE_URL + "jsonapi/"
 
 
-export function getItem(type, id, functionToKeepResults, functionToPreventSeveralAPICall) {
+export function getItem(type, id, functionToKeepResults, functionToPreventSeveralAPICall, elementType = "node", additionnalparameters = "") {
   if (type !== undefined && id !== undefined) {
     console.log("Parameters are set ! Type :" + type + "  Id :" + id);
-    let url = RESSOURCE_URL + "node/" + type + "/" + id
+    let url = RESSOURCE_URL + elementType + "/" + type + "/" + id + "?" + additionnalparameters
     functionToPreventSeveralAPICall()
+    console.log(url)
     fetch(url
     ).then(result => {
         console.log(result.clone().json());

@@ -2,7 +2,6 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import parse from 'html-react-parser'
 
@@ -24,9 +23,12 @@ function Dialogue(props) {
   var contenu = ""
   if (props.contenu) {
     contenu = props.contenu;
+    console.log(typeof contenu)
+    console.log(contenu)
   }
+
     return (
-        <div>
+      <>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -36,9 +38,8 @@ function Dialogue(props) {
             >
               <DialogTitle id="alert-dialog-title">{props.titre}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
+
                       {typeof contenu === 'object' ? contenu : parse(contenu)}
-                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   {/*<Button onClick={handleClose} color="primary" autoFocus>
@@ -46,7 +47,7 @@ function Dialogue(props) {
                     </Button>*/}
                 </DialogActions>
             </Dialog>
-        </div>
+      </>
     );
 
 }
