@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import BigHeader from "./BigHeader";
 import SmallHeader from "./SmallHeader";
 
-function HeaderHook() {
+function Header() {
 
     const {height, width} = useWindowDimensions();
   //var [hasScrolled, setHasScrolled] = useState(false);
@@ -81,4 +81,4 @@ const Component = () => {
         </div>
     );
 };
-export default HeaderHook;
+export default Header;

@@ -3,7 +3,7 @@ import Carte from "./Cartes/Carte";
 import Bouton from "./Bouton";
 import useGetParameters from "../Util/urlhandling";
 import {CircularProgress} from "@material-ui/core";
-import {getCookie} from '../Util/apiHandling'
+import {getCookie, getImageURL} from '../Util/apiHandling'
 import Dialogue from "./Dialogue";
 
 /**TODO:Modifier la structure du composant Session afin qu'il vérifie
@@ -14,7 +14,9 @@ function Projet(props) {
   var [autorisation, setAutorisation] = useState(false);
   var [session, setSession] = useState("");
   var [selectedCard, setSelectedCard] = useState("");
+  var [thumbnail, setThumbnail] = useState("");
   var [modalContent, setModalContent] = useState("");
+  var [imgURL, setImgURL] = useState("");
   var [modalTitle, setModalTitle] = useState("");
   var [open, setOpen] = useState(false);
   var [data, setData] = useState("");
@@ -36,7 +38,8 @@ function Projet(props) {
     setOpen(false);
     setModalTitle("");
     setModalContent('');
-    setSelectedCard('')
+    setSelectedCard('');
+    setImgURL('');
   };
   let parameters = '';
   parameters = useGetParameters('ticket');
@@ -68,11 +71,11 @@ function Projet(props) {
 
     }
     return (
-      <div className={"projets grid"}>
+      <div className={"projets grid conteneur"}>
         {}
 
         {generateProjects()}
-        <Dialogue open={open} handleClose={handleClose} titre={modalTitle} contenu={modalContent}/>
+        <Dialogue open={open} handleClose={handleClose} titre={modalTitle} contenu={modalContent} img={imgURL}/>
 
       </div>
 
@@ -86,7 +89,6 @@ function Projet(props) {
       <div>
         {error ? <p style={{color: "red"}}>{error}</p> : <p> Vous n'êtes pas autorisé à visualiser cette page</p>}
         <Bouton type={"main"} contenu={"Obtenir la permission"} onClick={handleClick}/>
-
       </div>
     );
   }
@@ -119,10 +121,12 @@ function Projet(props) {
 
     if (data) {
       return data.map(node => {
+        getImageURL(node.relationships, setThumbnail);
         properties.key = node.id;
         properties.titre = node.attributes.title;
         properties.type = 'projets';
         properties.id = node.id;
+        properties.urlImage = thumbnail;
         properties.setSelectedCard = setSelectedCard;
         return (<Carte {...properties} />);
       });
@@ -154,12 +158,14 @@ function Projet(props) {
 
   function getAssociatedContent() {
     if (selectedCard && !modalContent) {
-      let projectData = data.filter(node => node.id === selectedCard)[0].attributes;
+      let seletedProject = data.filter(node => node.id === selectedCard)[0];
+      let projectData = seletedProject.attributes;
+      let projectRelationship = seletedProject.relationships;
       console.log(projectData);
       setModalContent(projectData.body.value);
       setModalTitle(projectData.title);
       setOpen(true);
-
+      getImageURL(projectRelationship, setImgURL)
     }
 
   }

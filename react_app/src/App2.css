@@ -505,7 +505,7 @@ input[type="text"] {
   border: solid 1px var(--secondary-color);
 }
 .carte h4 {
-  font-weight: 400;
+  font-weight: 700;
   font-size: 124%;
 }
 
@@ -683,7 +683,7 @@ textarea:focus {
   margin-top: 4vw;
   text-align: left;
   display: grid;
-  grid-row-gap: 20%;
+  grid-row-gap: 1em;
   margin-bottom: 10%;
 }
 

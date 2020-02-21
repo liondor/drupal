@@ -7,16 +7,17 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 function GLPIConnect(props) {
   var [loading, setLoading] = useState(false);
   var [response, setResponse] = useState(null);
-
+  var [errorMsg, setErrorMsg] = useState("");
   if (response) {
+
     if (typeof response.session_token !== "undefined") {
       props.setToken(response.session_token)
       setResponse(null)
     } else if (typeof response.login_error !== "undefined") {
-      console.log(response.login_error);
+      setErrorMsg(response.login_error);
       setResponse(null)
     } else {
-      console.log("Communication error between Drupal and React")
+      setErrorMsg("Service indisponible");
       setResponse(null)
     }
     setLoading(false);
@@ -25,9 +26,11 @@ function GLPIConnect(props) {
     return (
       <div className={'glpiLogin'}>
         <Paper>
-          {response ? console.log(response) : ""}
           <p>Pour déposer un ticket, veuillez vous connecter</p>
-          <form id={"glpiForm"} onSubmit={handleSubmit}>
+          {
+            errorMsg ? <p style={{color: 'red'}}>{errorMsg}</p> : ""
+          }
+          <form id={"glpiForm"} onSubmit={connexion}>
             <label htmlFor={"username"}>Nom d'utilisateur </label>
             <input type={"text"} name={"username"}/>
             <label htmlFor={"mail"}>Mot de passe </label>
@@ -41,12 +44,13 @@ function GLPIConnect(props) {
   }
 
 
-  function handleSubmit(e) {
+  function connexion(e) {
     e.preventDefault();
     setLoading(true);
-    var name = e.target.username.value;
-    var pass = e.target.mdp.value;
-    connectToGLPI(name, pass, setResponse)
+    var nomUtilisateur = e.target.username.value;
+    var motDePasse = e.target.mdp.value;
+    setErrorMsg("");
+    connectToGLPI(nomUtilisateur, motDePasse, setResponse)
 
   }
 }

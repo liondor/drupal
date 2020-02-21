@@ -12,7 +12,7 @@ const TwoOptions = () => {
                     <IconContext.Provider value={{className: "optionIcone"}}>
                         <GiGearHammer/>
                     </IconContext.Provider>
-                    <h3> Outils numériques </h3>
+                  <h3> Outils numériqus </h3>
                 </div>
             </Link>
 

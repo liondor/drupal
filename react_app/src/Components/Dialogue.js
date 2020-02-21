@@ -21,24 +21,30 @@ function Dialogue(props) {
 
     };
   var contenu = ""
+  var img = ""
   if (props.contenu) {
     contenu = props.contenu;
     console.log(typeof contenu)
     console.log(contenu)
   }
+  if (props.img) {
+    img = props.img;
+    console.log(img)
+  }
 
     return (
       <>
             <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-                maxWidth={"xl"}
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              maxWidth={"xl"}
+              fullWidth={true}
             >
               <DialogTitle id="alert-dialog-title">{props.titre}</DialogTitle>
                 <DialogContent>
-
+                  {typeof props.img !== 'undefined' ? (<img src={props.img}/>) : ""}
                       {typeof contenu === 'object' ? contenu : parse(contenu)}
                 </DialogContent>
                 <DialogActions>

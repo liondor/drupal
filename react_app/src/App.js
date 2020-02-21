@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App2.css';
-import HeaderHook from "./Components/Header/HeaderHook"
+import Header from "./Components/Header/Header"
 import Footer from "./Components/Footer/Footer";
 import Accueil from "./Components/Accueil"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
@@ -14,17 +14,10 @@ import ScrollToTop from "./Components/ScrollToTop";
 import Login from "./Login";
 import Recherche from "./Components/Recherche";
 
-const LIST_URL = 'http://localhost:8900/dsin/web/jsonapi/node/conseils?fields[node--conseils]=title,body,field_image&fields[file--file]=uri&include=field_image';
-var qs = require('qs');
-
 class App extends Component {
     constructor() {
         super();
-        this.state = {database: null, token: [], articles: null, tokenLoaded: false, test: ''};
-        /*  this.loadDestinations = this.loadDestinations.bind(this);
-          this.updateData = this.updateData.bind(this);
-          this.loadArticles = this.loadArticles.bind(this);
-  */
+      this.state = {token: [], tokenLoaded: false};
     };
 
     render() {
@@ -34,7 +27,7 @@ class App extends Component {
                 <Router>
                     <ScrollToTop>
                         <header>
-                            <HeaderHook/>
+                          <Header/>
                         </header>
                         <Switch>
                             <Route exact path="/">
@@ -83,52 +76,9 @@ class App extends Component {
                     </ScrollToTop>
                 </Router>
 
-                {
-                    /*
-                    this.state.articles.map(item => <div><h1>{item.attributes.title}</h1>  <div dangerouslySetInnerHTML={{__html:item.attributes.body.value}}></div>
-                        <img src={item.relationships.field_image.data.id}/></div>)
-                    */
-                }
-                {/*     <DestinationList
-              data={this.state.data}
-            />
-            {this.state.articles !== null &&
-            this.state.articles !== undefined &&
-            this.state.articles.length > 0 ?
-              this.state.articles.map(item =><div> {item.attributes.title} </div> )
-              :
-              <div>No articles found.</div>
-            }*/}
-
             </div>
         );
     }
-
-    /*
-
-            loadDestinations() {
-                // Fetch Destinations.
-                fetch(LIST_URL, {mode: 'cors'})
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then((data) => this.updateData(data))
-                    .catch(err => console.log('Fetching Destinations Failed', err));
-            }
-    */
-        updateData(responseData) {
-            this.setState({database: responseData});
-        }
-
-        componentWillMount() {
-            // this.loadDestinations();
-        }
-
-        componentDidUpdate() {
-            /*console.log(this.state.token)
-            console.log(this.state.articles)
-            console.log(this.state.database)*/
-        }
 
   /*componentDidMount() {
       if (this.state.token == null) {
@@ -160,13 +110,6 @@ class App extends Component {
       ))
   }
 */
-        loadArticles(connectionAPI) {
-            console.log(connectionAPI)
-            if (connectionAPI) {
-
-            }
-            console.log(this.state.articles)
-        }
 
 
 }

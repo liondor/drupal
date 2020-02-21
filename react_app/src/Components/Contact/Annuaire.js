@@ -4,91 +4,82 @@ import {Paper} from "@material-ui/core";
 import PresentationPersonnel from "../PresentationPersonnel";
 import {getItem} from "../../Util/apiHandling";
 
-/**TODO: Les modifications du composant Dialogue pour le faire marcher avec le composant Projet causes des erreurs dans le composant Annuaire. Il fau adapter Annuaire aux changements effectués dans Dialogue.
- *
- *
+/** But : Afficher la liste des employés affecté au pole sélectionné
+ * Entrées :  Aucune
  *
  * */
 
-function Annuaire(props) {
+function Annuaire() {
   const handleClose = () => {
-    setOpen(false);
-    setHasCalledForPersonnel(false)
-    setSelection("")
-    setSelectionName("")
+    setOuvert(false);
+    setAppelAPIPourPersonnelLance(false)
+    setOptionChoisie("")
+    setNomDuPoleChoisi("")
     setListeDuPersonnel("")
   };
-  var [selection, setSelection] = useState("");
-  var [selectionName, setSelectionName] = useState("");
-  var [optionsData, setOptionsData] = useState("");
+  var [optionChoisie, setOptionChoisie] = useState("");
+  var [nomDuPoleChoisi, setNomDuPoleChoisi] = useState("");
+  var [donneeDuPoleChoisie, setDonneeDuPoleChoisi] = useState("");
   var [listeDuPersonnel, setListeDuPersonnel] = useState("");
-  var [open, setOpen] = useState(false);
-  var [hasCalled, setHasCalled] = useState(false);
-  var [hasCalledForPersonnel, setHasCalledForPersonnel] = useState(false);
+  var [ouvert, setOuvert] = useState(false);
+  var [isAppelAPILance, setAppelAPILance] = useState(false);
+  var [isAppelAPIPourPersonnelLance, setAppelAPIPourPersonnelLance] = useState(false);
 
   getPoles();
-  if (listeDuPersonnel)
-    console.log(listeDuPersonnel)
   return (
     <div>
       <div id={"annuaire"}>
         <Paper id={"annuaireBackground"}>
-          <h2> Contactez-nous !</h2>
           <div id={"annuaireSelectorWrapper"}>
-            <select id={"annuaireSelect"} onChange={e => changePole(e)} value={selection}>
+            <select id={"annuaireSelect"} onChange={e => changePoleChoisi(e)} value={optionChoisie}>
               <option value={""}>Choissisez un pôle à contacter....</option>
-              {optionsData ? appendOption() : ""}
+              {donneeDuPoleChoisie ? genereDesOptions() : ""}
 
             </select>
           </div>
         </Paper>
       </div>
-      <Dialogue open={open} handleClose={handleClose} titre={selectionName} contenu={appendPersonnel()}/>
+      <Dialogue open={ouvert} handleClose={handleClose} titre={nomDuPoleChoisi} contenu={genereDuPersonnel()}/>
     </div>
   );
 
   function getPoles() {
-    if (!hasCalled) {
-      getItem("poles_dsin", "", setOptionsData, preventSeveralAPICalls, "taxonomy_term");
+    if (!isAppelAPILance) {
+      getItem("poles_dsin", "", setDonneeDuPoleChoisi, preventSeveralAPICalls, "taxonomy_term");
     }
   }
 
   function getPersonnel(idOfPole) {
-    if (!hasCalledForPersonnel)
+    if (!isAppelAPIPourPersonnelLance)
       getItem("personnel", "", setListeDuPersonnel, preventSeveralAPICallsPersonnel, "node", "filter[field_pole.id]=" + idOfPole)
   }
 
   function preventSeveralAPICalls() {
-    setHasCalled(true);
+    setAppelAPILance(true);
   }
 
   function preventSeveralAPICallsPersonnel() {
-    setHasCalledForPersonnel(true);
+    setAppelAPIPourPersonnelLance(true);
   }
 
-  function changePole(event) {
-    let poleName = event.target.options[event.target.selectedIndex].text;
-    let value = event.target.value;
+  function changePoleChoisi(event) {
+    let nomDeLOptionChoisi = event.target.options[event.target.selectedIndex].text;
+    let valeurDeLOptionChoisie = event.target.value;
 
-    if (value === null) {
-      console.log("Welp")
-    } else {
-      console.log("On a effectivement changer le pole :" + value);
-      setSelection(value);
-      setSelectionName(poleName);
-      getPersonnel(value);
-      setOpen(true)
+    if (valeurDeLOptionChoisie) {
+      setOptionChoisie(valeurDeLOptionChoisie);
+      setNomDuPoleChoisi(nomDeLOptionChoisi);
+      getPersonnel(valeurDeLOptionChoisie);
+      setOuvert(true)
     }
   }
 
-  function appendOption() {
-    console.log('On charge les catégories !');
-    return Object.entries(optionsData).map(([cle, objet]) => (
+  function genereDesOptions() {
+    return Object.entries(donneeDuPoleChoisie).map(([cle, objet]) => (
       <option key={cle} value={objet.id} name={objet.attributes.name}> {objet.attributes.name}</option>))
   }
 
-  function appendPersonnel() {
-    console.log('On charge les catégories !');
+  function genereDuPersonnel() {
     return Object.entries(listeDuPersonnel
     ).map(([cle, objet]) =>
       (
