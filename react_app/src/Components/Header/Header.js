@@ -2,51 +2,54 @@ import React, {useEffect, useRef, useState} from 'react'
 import BigHeader from "./BigHeader";
 import SmallHeader from "./SmallHeader";
 
-function Header() {
+/** But: Sert à alterner entre la version de l'entête pour petits et grands écrans.
+ * Sert également à permettre à l'entête d'être constamment affiché en haut de la fenêtre  (Sticky header)
+ *
+ * Entrées: Aucunes
+ * */
 
-    const {height, width} = useWindowDimensions();
-  //var [hasScrolled, setHasScrolled] = useState(false);
-  var hasScrolled = useRef(false);
-    useEffect(() => {
-        if (width >= 768) {
-          const header = document.getElementsByClassName("header")[0];
-          //  const header = document.getElementById("header");
-          const menu = document.getElementById("menuBig");
-            const offset = document.getElementById("offset");
-            const sticky = header.offsetTop;
-            const scrollCallBack = window.addEventListener("scroll", () => {
-                if (window.pageYOffset > sticky) {
-                    header.classList.add("sticky");
-                  offset.classList.add("offsetSticky");
-                  menu.classList.add("stickyText");
-                  header.classList.remove("headerGridNonSticky");
-                  hasScrolled.current = true;
-                } else {
-                  offset.classList.remove("offsetSticky");
-                    header.classList.remove("sticky");
-                  menu.classList.remove("stickyText");
-                  header.classList.add('headerGridNonSticky');
-                  hasScrolled.current = false;
-                }
-            });
-            return () => {
-                window.removeEventListener("scroll", scrollCallBack);
-            };
+function Header() {
+  const {height, width} = useWindowDimensions();
+  var aDefile = useRef(false);
+  useEffect(() => {
+    if (width >= 768) {
+      const header = document.getElementsByClassName("header")[0];
+      const menu = document.getElementById("menuBig");
+      const decalage = document.getElementById("offset");
+      const sticky = header.offsetTop;
+      const defilementCallBack = window.addEventListener("scroll", () => {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+          decalage.classList.add("offsetSticky");
+          menu.classList.add("stickyText");
+          header.classList.remove("headerGridNonSticky");
+          aDefile.current = true;
+        } else {
+          decalage.classList.remove("offsetSticky");
+          header.classList.remove("sticky");
+          menu.classList.remove("stickyText");
+          header.classList.add('headerGridNonSticky');
+          aDefile.current = false;
         }
-    }, [width, hasScrolled]);
-  if (width >= 768) {
-        return (
-            <>
-                <BigHeader/>
-            </>
-        );
-    } else {
-        return (
-            <>
-                <SmallHeader/>
-            </>
-        );
+      });
+      return () => {
+        window.removeEventListener("scroll", defilementCallBack);
+      };
     }
+  }, [width, aDefile]);
+  if (width >= 768) {
+    return (
+      <>
+        <BigHeader/>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <SmallHeader/>
+      </>
+    );
+  }
 }
 
 function getWindowDimensions() {
@@ -72,13 +75,4 @@ export function useWindowDimensions() {
     return windowDimensions;
 }
 
-const Component = () => {
-    const {height, width} = useWindowDimensions();
-
-    return (
-        <div>
-            width: {width} ~ height: {height}
-        </div>
-    );
-};
 export default Header;

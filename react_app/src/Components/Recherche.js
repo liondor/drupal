@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useLocation} from "react-router-dom";
 import ListLinks from "./ListLinks";
-import SearchBar from "./Header/SearchBar";
+import BarreDeRecherche from "./Header/BarreDeRecherche";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 /**
@@ -109,7 +109,7 @@ const Recherche = () => {
   return (
     <>
       <div id={'searchPageSearchBar'}>
-        <SearchBar reset={searchAgain}/>
+        <BarreDeRecherche reset={searchAgain}/>
       </div>
       <DisplayQuery/>
     </>
