@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import parse from 'html-react-parser'
 
-/**TODO: Faire passer l'id de la node à "Outils", et renvoyer vers "Présentation" si l'utilisateur clique.
+/**
  *
  *
  *
@@ -18,7 +18,7 @@ const Outil = (props) => {
   } else {
     linkParameters = {
       className: "outil whiteText",
-      to: '/outil?id=' + props.id + '&type=' + props.type + '&origin=' + props.origin,
+      to: '/presentation?id=' + props.id + '&type=' + props.type + '&origin=' + props.origin,
     }
 
   }

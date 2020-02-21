@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useRef, useState} from 'react'
 import Carte from "./Cartes/Carte";
 import Bouton from "./Bouton";
 import useGetParameters from "../Util/urlhandling";
@@ -6,79 +6,68 @@ import {CircularProgress} from "@material-ui/core";
 import {getCookie, getImageURL} from '../Util/apiHandling'
 import Dialogue from "./Dialogue";
 
-/**TODO:Modifier la structure du composant Session afin qu'il vérifie
+/**
  *
  * */
-function Projet(props) {
-
-  var [autorisation, setAutorisation] = useState(false);
-  var [session, setSession] = useState("");
-  var [selectedCard, setSelectedCard] = useState("");
+function Projet() {
+  var [tokenSession, setTokenSession] = useState("");
+  var [carteChoisie, setCarteChoisie] = useState("");
   var [thumbnail, setThumbnail] = useState("");
-  var [modalContent, setModalContent] = useState("");
-  var [imgURL, setImgURL] = useState("");
-  var [modalTitle, setModalTitle] = useState("");
+  var [contenuDuProjetChoisi, setContenuDuProjetChoisi] = useState("");
+  var [imageURL, setImageURL] = useState("");
+  var [titreProjetChoisi, setTitreProjetChoisi] = useState("");
   var [open, setOpen] = useState(false);
   var [data, setData] = useState("");
   var [error, setError] = useState("");
   var [isLoading, setIsLoading] = useState(false);
-  var ticket = useRef("");
-  var isSessionRequested = useRef(false);
-  var isContentRequested = useRef(false);
+  var ticketCAS = useRef("");
+  var isAppelAPISessionFait = useRef(false);
+  var isAppelAPIContenuFait = useRef(false);
 
   function handleClick() {
     setError('');
     setIsLoading(true);
-    setSession('');
+    setTokenSession('');
     window.location.href = "https://auth.martinique.univ-ag.fr/cas/login?service=http://localhost:8900/projets"
-    //  fetch("http://localhost:8900/api/?session=")
   }
 
   const handleClose = () => {
     setOpen(false);
-    setModalTitle("");
-    setModalContent('');
-    setSelectedCard('');
-    setImgURL('');
+    setTitreProjetChoisi("");
+    setContenuDuProjetChoisi('');
+    setCarteChoisie('');
+    setImageURL('');
   };
   let parameters = '';
   parameters = useGetParameters('ticket');
-  if (session) {
-    askForPermission(session);
+  if (tokenSession) {
+    askForPermission(tokenSession);
   } else {
     let sessionCookie = ('');
     sessionCookie = getCookie('id_session');
     if (sessionCookie && !parameters['ticket']) {
-      setSession(sessionCookie);
+      setTokenSession(sessionCookie);
       setIsLoading(true);
     }
 
   }
   if (typeof parameters.ticket !== "undefined") {
-    if (parameters.ticket && !ticket.current) {
-      ticket.current = parameters.ticket;
+    if (parameters.ticket && !ticketCAS.current) {
+      ticketCAS.current = parameters.ticket;
       setIsLoading(true);
-      startSession(ticket);
+      startSession(ticketCAS);
     }
   }
-  useEffect(() => {
-
-
-  }, [session]);
   if (data) {
-    if (selectedCard) {
+    if (carteChoisie) {
       getAssociatedContent()
-
     }
     return (
       <div className={"projets grid conteneur"}>
-        {}
-
         {generateProjects()}
-        <Dialogue open={open} handleClose={handleClose} titre={modalTitle} contenu={modalContent} img={imgURL}/>
-
+        <Dialogue open={open} handleClose={handleClose} titre={titreProjetChoisi} contenu={contenuDuProjetChoisi}
+                  img={imageURL}/>
       </div>
-
     );
   } else if (!data && isLoading && !error) {
     return (
@@ -93,10 +82,10 @@ function Projet(props) {
     );
   }
 
-  function askForPermission(session) {
-    if (!isContentRequested.current) {
-      isContentRequested.current = true;
-      fetch('/api/projets?session=' + session
+  function askForPermission(tokenDeSession) {
+    if (!isAppelAPIContenuFait.current) {
+      isAppelAPIContenuFait.current = true;
+      fetch('/api/projets?session=' + tokenDeSession
       ).then(result => {
           return result.json()
         }
@@ -107,7 +96,7 @@ function Projet(props) {
           return result.data
         } else if (typeof result.message !== "undefined" && result.message) {
           setError(result.message);
-          setSession('');
+          setTokenSession('');
           return result.message
         } else {
           setError("Check API Call")
@@ -127,21 +116,20 @@ function Projet(props) {
         properties.type = 'projets';
         properties.id = node.id;
         properties.urlImage = thumbnail;
-        properties.setSelectedCard = setSelectedCard;
+        properties.setSelectedCard = setCarteChoisie;
         return (<Carte {...properties} />);
       });
     }
   }
 
   function startSession() {
-    if (!isSessionRequested.current) {
-      isSessionRequested.current = true;
-      fetch('/api/sessionhandle?ticket=' + ticket.current
+    if (!isAppelAPISessionFait.current) {
+      isAppelAPISessionFait.current = true;
+      fetch('/api/sessionhandle?ticket=' + ticketCAS.current
       ).then(result => result.json()
       ).then(resultat => {
-          console.log(resultat);
           if (typeof resultat.id_session !== "undefined") {
-            setSession(resultat.id_session);
+            setTokenSession(resultat.id_session);
             document.cookie = "id_session=" + resultat.id_session;
             return (resultat.id_session)
           } else if (typeof resultat.message !== "undefined") {
@@ -157,17 +145,16 @@ function Projet(props) {
   }
 
   function getAssociatedContent() {
-    if (selectedCard && !modalContent) {
-      let seletedProject = data.filter(node => node.id === selectedCard)[0];
+    if (carteChoisie && !contenuDuProjetChoisi) {
+      let seletedProject = data.filter(node => node.id === carteChoisie)[0];
       let projectData = seletedProject.attributes;
       let projectRelationship = seletedProject.relationships;
       console.log(projectData);
-      setModalContent(projectData.body.value);
-      setModalTitle(projectData.title);
+      setContenuDuProjetChoisi(projectData.body.value);
+      setTitreProjetChoisi(projectData.title);
       setOpen(true);
-      getImageURL(projectRelationship, setImgURL)
+      getImageURL(projectRelationship, setImageURL)
     }
-
   }
 }
 

@@ -5,15 +5,15 @@ function useParametersFromURL() {
   return new URLSearchParams(useLocation().search);
 }
 
-export default function useGetParameters(...namesOfParameters) {
+export default function useGetParameters(...nomsDesParametresVoulu) {
   var parameters = useParametersFromURL();
-  var objectContainingParameters = {};
-  for (let i = 0; i < namesOfParameters.length; i++) {
-    let name = namesOfParameters[i]
+  var conteneurDesParametres = {};
+  for (let i = 0; i < nomsDesParametresVoulu.length; i++) {
+    let name = nomsDesParametresVoulu[i]
     let value = parameters.get(name)
-    objectContainingParameters[name] = value;
+    conteneurDesParametres[name] = value;
   }
 
-  return objectContainingParameters;
+  return conteneurDesParametres;
 
 }

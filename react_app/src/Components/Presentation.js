@@ -30,34 +30,16 @@ const Presentation = (props) => {
   var [results, setResults] = useState(null)
   var origin = useRef("");
 
-  var div = document.createElement('div')
-  if (contenu !== "") {
-    div = parse(contenu)
-    // console.log(contenu)
-    //console.log(div)
-
-  }
   return (
     <div className={"outilPresentation"}>
       <h1 className={"outilPresentationTitre"}> {titre}</h1>
-
-      <Test/>
-      {/*image ? <img src={image}/> : ""*/}
+      {useGetContenu()}
       {contenu !== "" ? (<div>{parse(contenu)}</div>) : (
         <div style={{display: "grid", justifyItems: "center"}}><CircularProgress/></div>)}
       {generateButton()}
 
     </div>);
 
-  function searchContent(type, id) {
-    if (!searchDone.current) {
-      let url = "http://localhost:8900/api/jsonapi/node/" + type + "/" + id;
-      fetch(url,
-        {headers: {'Accept': 'application/vnd.api+json'},}
-      ).then()
-    }
-
-  }
 
   function preventSeveralCalls() {
     searchDone.current = true;
@@ -70,39 +52,38 @@ const Presentation = (props) => {
   function generateButton() {
     let page = "";
     let contenu = ""
-    let shouldReturn = false;
+    let isArticleOrOutil = false;
     if (type) {
       let typeOfContent = type.substring(6);
       switch (typeOfContent) {
         case("article"):
           page = 'news';
           contenu = "Retour vers la liste des articles"
-          shouldReturn = true;
+          isArticleOrOutil = true;
           break;
         case ("outils"):
           page = 'categorie?id=' + origin.current + '&type=categorie';
           contenu = "Retour vers la liste des outils numériques";
-          shouldReturn = true;
+          isArticleOrOutil = true;
           break;
       }
-      if (shouldReturn) {
+      if (isArticleOrOutil) {
         return (<Link to={page}><Bouton type={'main'} contenu={contenu}/> </Link>);
       }
     }
   }
 
-  function Test() {
+  function useGetContenu() {
     const parameters = useGetParameters('type', 'id', 'origin')
     var testID = parameters["id"]
     var testType = parameters["type"]
-    var ori = parameters["origin"]
-    origin.current = ori;
+    var idDeLaCategorie = parameters["origin"]
+    origin.current = idDeLaCategorie;
     if (!searchDone.current) {
       searchDone.current = true
       getItem(testType, testID, setResults, preventSeveralCalls)
     }
     if (results !== null && !searchIMGDone.current) {
-      //  console.log(results)
       var data = extractData(results, preventSeveralCallsIMG, setImage, 'id', 'titre', 'type', 'contenu', 'image')
       if (typeof data !== "undefined") {
         setId(data['id'])
@@ -110,12 +91,7 @@ const Presentation = (props) => {
         setType(data['type'])
         setContenu(data['contenu'])
       }
-      //    console.log(image)
     }
-    return (
-      <>
-      </>
-    );
   }
 
 }

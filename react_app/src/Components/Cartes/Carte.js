@@ -17,7 +17,7 @@ export default function Carte(props) {
     attributsElementLink.to = "/projets"
     attributsElementLink.onClick = renvoiCarteChoisieAProjet;
   } else {
-    attributsElementLink.to = '/outil?id=' + props.id + '&type=' + props.type
+    attributsElementLink.to = '/presentation?id=' + props.id + '&type=' + props.type
   }
 
   function renvoiCarteChoisieAProjet(e) {

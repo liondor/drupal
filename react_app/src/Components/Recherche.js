@@ -5,48 +5,48 @@ import BarreDeRecherche from "./Header/BarreDeRecherche";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 /**
- * TODO: Restraindre le type de contenu pouvant être trouvé via la recherche
+ *
  *
  * */
 const Recherche = () => {
-  var [results, setResults] = useState(null);
-  var searchDone = useRef(false);
+  var [resultatRecherche, setResultatRecherche] = useState(null);
+  var isAppelAPIFait = useRef(false);
 
-  function searchContent(textRequested) {
-    if (!searchDone.current) {
+  function recherche(texteRecherche) {
+    if (!isAppelAPIFait.current) {
       let url = "http://localhost:8900/api/jsonapi/index/default_index";
-      if (textRequested !== "") {
-        url += '?filter[fulltext]=' + textRequested
+      if (texteRecherche !== "") {
+        url += '?filter[fulltext]=' + texteRecherche
       }
       fetch(url,
         {headers: {'Accept': 'application/vnd.api+json'},}
       ).then(results => results.json()).then(jsonResponse => jsonResponse.data
       ).then(
-        listOfNodes => {
-          var temp = listOfNodes.map(function (node) {
-            var data = {
-              type: node.type,
-              titre: node.attributes.title,
-              id: node.id,
-              date: node.attributes.created,
+        listeDuContenuTrouve => {
+          var listeContenantLesChampsQuiNousInteresse = listeDuContenuTrouve.map(function (elementDeLaListe) {
+            var donneesDeLElement = {
+              type: elementDeLaListe.type,
+              titre: elementDeLaListe.attributes.title,
+              id: elementDeLaListe.id,
+              date: elementDeLaListe.attributes.created,
             };
-            if (node.attributes.body) {
-              if (node.attributes.body.value) {
-                data.content = node.attributes.body.value;
+            if (elementDeLaListe.attributes.body) {
+              if (elementDeLaListe.attributes.body.value) {
+                donneesDeLElement.content = elementDeLaListe.attributes.body.value;
               }
-            } else if (node.description) {
-              data.content = node.description;
+            } else if (elementDeLaListe.description) {
+              donneesDeLElement.content = elementDeLaListe.description;
             }
 
-            return (data)
+            return (donneesDeLElement)
             }
           );
 
-          return temp
+          return listeContenantLesChampsQuiNousInteresse
         }
       ).then(res => {
-        setResults(res);
-        searchDone.current = true
+        setResultatRecherche(res);
+        isAppelAPIFait.current = true
       })
     }
   }
@@ -56,23 +56,20 @@ const Recherche = () => {
   }
 
   function searchAgain() {
-    if (searchDone) {
-      searchDone.current = false;
-      console.log("You can search again !")
-      //   setResults(null)
-
+    if (isAppelAPIFait) {
+      isAppelAPIFait.current = false;
     }
   }
 
   function DisplayQuery() {
     let query = useQuery();
-    let text = "";
-    text = query.get("q");
-    searchContent(text);
-    let researchResults;
-    if (results !== null) {
+    let texteRecherche = "";
+    texteRecherche = query.get("q");
+    recherche(texteRecherche);
+    let resultatRecherche;
+    if (resultatRecherche !== null) {
 
-      researchResults = results.map(node => <ListLinks key={node.id} id={node.id} titre={node.titre}
+      resultatRecherche = resultatRecherche.map(node => <ListLinks key={node.id} id={node.id} titre={node.titre}
                                                        content={node.content} date={node.date}
                                                        type={node.type.substring(6)}/>)
     }
@@ -80,30 +77,28 @@ const Recherche = () => {
     return (
       <>
         <hr/>
-        {searchDone.current ? researchResults : <CircularProgress/>}
+        {isAppelAPIFait.current ? resultatRecherche : <CircularProgress/>}
       </>
     );
   }
 
   useEffect
   (() => {
-      let header = document.querySelector("header .searchbar_container");
-      if (header) {
-        header.classList.add('hide')
+      let barreRechercheDuHeader = document.querySelector("header .searchbar_container");
+      if (barreRechercheDuHeader) {
+        barreRechercheDuHeader.classList.add('hide')
       }
-      let goodSearchBar = document.querySelector("#searchPageSearchBar .searchbar_container");
-      console.log(goodSearchBar);
-      let input = document.querySelector("#searchPageSearchBar .searchbar_container");
-      goodSearchBar.classList.add('searchPageSearchBar');
-      input.classList.add('searchPageSearchBarInput');
+      let barreRechercheDePageRecherche = document.querySelector("#searchPageSearchBar .searchbar_container");
+      let inputDeBarreRechercheDePageRecherche = document.querySelector("#searchPageSearchBar .searchbar_container");
+      barreRechercheDePageRecherche.classList.add('searchPageSearchBar');
+      inputDeBarreRechercheDePageRecherche.classList.add('searchPageSearchBarInput');
 
       return () => {
-        if (header) {
-          header.classList.remove("hide")
+        if (barreRechercheDuHeader) {
+          barreRechercheDuHeader.classList.remove("hide")
         }
       }
     }
-
     , []
   );
   return (
@@ -115,6 +110,5 @@ const Recherche = () => {
     </>
 
   );
-
 };
 export default Recherche;

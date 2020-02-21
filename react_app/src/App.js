@@ -11,7 +11,6 @@ import Contact from "./Components/Contact/Contact";
 import GridTwo from "./Components/GridTwo";
 import Projet from "./Components/Projet";
 import ScrollToTop from "./Components/ScrollToTop";
-import Login from "./Login";
 import Recherche from "./Components/Recherche";
 
 class App extends Component {
@@ -42,7 +41,7 @@ class App extends Component {
                                     l'université</h1>
                               <Liste token={this.state.token} type={'categorie_outils'}/>
                             </Route>
-                          <Route path="/outil">
+                          <Route path="/presentation">
                             <Presentation/>
                           </Route>
                           <Route path="/categorie">
@@ -65,9 +64,6 @@ class App extends Component {
                           <Route path="/news">
                             <Liste token={this.state.token} type={"articles"}/>
                           </Route>
-                            <Route path="/login">
-                                <Login/>
-                            </Route>
                           <Route path="/recherche">
                             <Recherche/>
                             </Route>
